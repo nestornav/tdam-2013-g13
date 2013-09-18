@@ -26,22 +26,22 @@ public class MainActivity extends Activity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
  
         // Create first Tab
-        tab = actionBar.newTab().setTabListener(new FragmentTab1());
+        tab = actionBar.newTab().setTabListener(new FragmentTabContactos());
         // Create your own custom icon
 //        tab.setIcon(R.drawable.tab1);
-        tab.setText("Tab1");
+        tab.setText("Contactos");
         actionBar.addTab(tab);
  
         // Create Second Tab
-        tab = actionBar.newTab().setTabListener(new FragmentTab2());
+        tab = actionBar.newTab().setTabListener(new FragmentTabHistorial());
         // Set Tab Title
-        tab.setText("Tab2");
+        tab.setText("Historial");
         actionBar.addTab(tab);
  
         // Create Third Tab
-        tab = actionBar.newTab().setTabListener(new FragmentTab3());
+        tab = actionBar.newTab().setTabListener(new FragmentTabConectividad());
         // Set Tab Title
-        tab.setText("Tab3");
+        tab.setText("Conectividad");
         actionBar.addTab(tab);
     }
 

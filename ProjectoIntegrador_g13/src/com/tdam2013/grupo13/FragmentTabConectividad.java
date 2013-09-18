@@ -6,28 +6,28 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
  
-public class FragmentTab2 extends Fragment implements ActionBar.TabListener {
+public class FragmentTabConectividad extends Fragment implements ActionBar.TabListener {
  
     private Fragment mFragment;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Get the view from fragment2.xml
-        getActivity().setContentView(R.layout.fragmenttab2);
+        // Get the view from fragment3.xml
+        getActivity().setContentView(R.layout.fragmenttab_conectividad);
     }
  
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
-        mFragment = new FragmentTab2();
-        // Attach fragment2.xml layout
+        mFragment = new FragmentTabConectividad();
+        // Attach fragment3.xml layout
         ft.add(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
         // TODO Auto-generated method stub
-        // Remove fragment2.xml layout
+        // Remove fragment3.xml layout
         ft.remove(mFragment);
     }
  
