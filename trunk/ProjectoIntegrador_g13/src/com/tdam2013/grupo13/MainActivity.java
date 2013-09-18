@@ -13,35 +13,28 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Create an actionbar
         ActionBar actionBar = getActionBar();
  
-        // Hide Actionbar Icon
         actionBar.setDisplayShowHomeEnabled(false);
  
-        // Hide Actionbar Title
         actionBar.setDisplayShowTitleEnabled(false);
  
-        // Create Actionbar Tabs
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
  
-        // Create first Tab
         tab = actionBar.newTab().setTabListener(new FragmentTabContactos());
-        // Create your own custom icon
-//        tab.setIcon(R.drawable.tab1);
         tab.setText("Contactos");
         actionBar.addTab(tab);
  
-        // Create Second Tab
         tab = actionBar.newTab().setTabListener(new FragmentTabHistorial());
-        // Set Tab Title
         tab.setText("Historial");
         actionBar.addTab(tab);
  
-        // Create Third Tab
         tab = actionBar.newTab().setTabListener(new FragmentTabConectividad());
-        // Set Tab Title
         tab.setText("Conectividad");
+        actionBar.addTab(tab);
+        
+        tab = actionBar.newTab().setTabListener(new FragmentTabConfiguracion());
+        tab.setText("Configuracion");
         actionBar.addTab(tab);
     }
 
