@@ -1,43 +1,54 @@
 package com.tdam2013.grupo13;
 
-import android.os.Bundle;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
-
+ 
 public class MainActivity extends Activity {
-
+    // Declare Tab Variable
+    Tab tab;
+ 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        TabHost tabHost=(TabHost)findViewById(R.id.tabHost);
-        tabHost.setup();
-
-        TabSpec spec1=tabHost.newTabSpec("Tab 1");
-        spec1.setContent(R.id.tab1);
-        spec1.setIndicator("Tab 1");
-
-        TabSpec spec2=tabHost.newTabSpec("Tab 2");
-        spec2.setIndicator("Tab 2");
-        spec2.setContent(R.id.tab2);
-
-        TabSpec spec3=tabHost.newTabSpec("Tab 3");
-        spec3.setIndicator("Tab 3");
-        spec3.setContent(R.id.tab3);
-
-        tabHost.addTab(spec1);
-        tabHost.addTab(spec2);
-        tabHost.addTab(spec3);
+        // Create an actionbar
+        ActionBar actionBar = getActionBar();
+ 
+        // Hide Actionbar Icon
+        actionBar.setDisplayShowHomeEnabled(false);
+ 
+        // Hide Actionbar Title
+        actionBar.setDisplayShowTitleEnabled(false);
+ 
+        // Create Actionbar Tabs
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+ 
+        // Create first Tab
+        tab = actionBar.newTab().setTabListener(new FragmentTab1());
+        // Create your own custom icon
+//        tab.setIcon(R.drawable.tab1);
+        tab.setText("Tab1");
+        actionBar.addTab(tab);
+ 
+        // Create Second Tab
+        tab = actionBar.newTab().setTabListener(new FragmentTab2());
+        // Set Tab Title
+        tab.setText("Tab2");
+        actionBar.addTab(tab);
+ 
+        // Create Third Tab
+        tab = actionBar.newTab().setTabListener(new FragmentTab3());
+        // Set Tab Title
+        tab.setText("Tab3");
+        actionBar.addTab(tab);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
     
