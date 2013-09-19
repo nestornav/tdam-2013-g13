@@ -5,6 +5,7 @@ import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +51,9 @@ public class FragmentTabContactos extends ListFragment implements
 		super.onListItemClick(l, v, position, id);
 
 		// Mostramos un mensaje con el elemento pulsado
-		Toast.makeText(getActivity(), "Ha pulsado " + contactos[position],
+		Toast.makeText(getActivity(), "Vamos a la ventana de mensajes con el contacto " + contactos[position],
 				Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
 	}
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -65,7 +67,7 @@ public class FragmentTabContactos extends ListFragment implements
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		ft.attach(mFragment);
+
 	}
 
 }
