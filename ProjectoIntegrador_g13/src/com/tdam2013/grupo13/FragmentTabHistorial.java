@@ -13,27 +13,21 @@ public class FragmentTabHistorial extends Fragment implements ActionBar.TabListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Get the view from fragment2.xml
         getActivity().setContentView(R.layout.fragmenttab_historial);
     }
  
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
         mFragment = new FragmentTabHistorial();
-        // Attach fragment2.xml layout
         ft.add(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        // Remove fragment2.xml layout
         ft.remove(mFragment);
     }
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
- 
+    	ft.attach(mFragment);
     }
  
 }
