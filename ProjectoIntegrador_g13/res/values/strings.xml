@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
- 
+
     <string name="app_name">TDAM Grupo 13</string>
     <string name="menu_settings">Settings</string>
     <string name="FragmentContactos">This is Fragment Contactos</string>
@@ -8,5 +8,7 @@
     <string name="FragmentConectividad">This is Fragment Conectividad</string>
     <string name="FragmentConfiguracion">This is Fragment Configuracion</string>
     <string name="action_settings">Settings</string>
- 
+    <string name="title_activity_activity_contact_profile">ActivityContactProfile</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
