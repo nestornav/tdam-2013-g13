@@ -54,6 +54,8 @@ public class FragmentTabContactos extends ListFragment implements
 		Toast.makeText(getActivity(), "Vamos a la ventana de mensajes con el contacto " + contactos[position],
 				Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
+		intent.putExtra("contactName", contactos[position]);
+		startActivity(intent);
 	}
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
