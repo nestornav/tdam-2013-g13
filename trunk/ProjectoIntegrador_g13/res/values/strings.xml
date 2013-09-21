@@ -9,6 +9,6 @@
     <string name="FragmentConfiguracion">This is Fragment Configuracion</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_activity_contact_profile">ActivityContactProfile</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="contact_name">contact_name</string>
 
 </resources>

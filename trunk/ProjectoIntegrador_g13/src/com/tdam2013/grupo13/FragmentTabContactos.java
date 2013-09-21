@@ -47,12 +47,8 @@ public class FragmentTabContactos extends ListFragment implements
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 
-		// Mostramos un mensaje con el elemento pulsado
-		Toast.makeText(getActivity(), "Vamos a la ventana de mensajes con el contacto " + contactos[position],
-				Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
 		intent.putExtra("contactName", contactos[position]);
 		startActivity(intent);
