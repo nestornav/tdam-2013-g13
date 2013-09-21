@@ -8,9 +8,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivityContactProfile" >
 
+    <ImageView
+        android:id="@+id/imageViewContactPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
     <TextView
         android:id="@+id/contact_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageViewContactPicture"
+        android:layout_below="@+id/imageViewContactPicture"
+        android:text="Contact Name" />
+    
+    <ListView
+        android:id="@+id/phones_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_name" />
 
 </RelativeLayout>
