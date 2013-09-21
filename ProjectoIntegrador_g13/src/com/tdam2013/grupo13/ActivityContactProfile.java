@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
@@ -17,7 +18,7 @@ public class ActivityContactProfile extends Activity {
 		setupActionBar();
 		
 		String contactName = getIntent().getStringExtra("contactName");
-		
+		((TextView) findViewById(R.id.contact_name)).setText(contactName);
 		Toast.makeText(this, "Nombre del contacto " + contactName,
 				Toast.LENGTH_SHORT).show();
 	}
