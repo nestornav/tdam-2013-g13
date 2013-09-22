@@ -1,5 +1,9 @@
 package com.tdam2013.grupo13;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
@@ -7,6 +11,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +31,13 @@ public class FragmentTabContactos extends ListFragment implements
 			"Clinton Decamp", "Patricia Hunley", "Brenda Owens", "Lue Wind",
 			"Odessa Moline", "Lou Dargan", "Aron Redfern", "Pa Tierney",
 			"Maryanna Lone", "Shannan Seiber", "Velia Cao", "Gwendolyn Devens", };
+	// Mock teléfonos
+	private static ArrayList<String> telefonos;
+	static {
+		telefonos = new ArrayList<String>();
+		telefonos.add("+5491234567890");
+		telefonos.add("+1234567890123");
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +63,7 @@ public class FragmentTabContactos extends ListFragment implements
 
 		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
 		intent.putExtra("contactName", contactos[position]);
+		intent.putStringArrayListExtra("telefonos", telefonos);
 		startActivity(intent);
 	}
 
