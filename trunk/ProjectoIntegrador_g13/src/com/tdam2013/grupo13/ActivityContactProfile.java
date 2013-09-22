@@ -1,9 +1,17 @@
 package com.tdam2013.grupo13;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
@@ -17,10 +25,17 @@ public class ActivityContactProfile extends Activity {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		// Loading contact name
 		String contactName = getIntent().getStringExtra("contactName");
 		((TextView) findViewById(R.id.contact_name)).setText(contactName);
 		Toast.makeText(this, "Nombre del contacto " + contactName,
 				Toast.LENGTH_SHORT).show();
+		
+		//Loading phones
+		ArrayList<String> telefonos = getIntent().getStringArrayListExtra("telefonos");
+		ListView phones = (ListView) findViewById(R.id.phones_list);
+		ListAdapter phonesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, telefonos);
+		phones.setAdapter(phonesAdapter);
 	}
 
 	/**
