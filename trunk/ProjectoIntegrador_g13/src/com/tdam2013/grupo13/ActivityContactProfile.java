@@ -18,24 +18,36 @@ import android.support.v4.app.NavUtils;
 
 public class ActivityContactProfile extends Activity {
 
+	private String contactName;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contact_profile);
+		
+		// Loading contact name
+		contactName = getIntent().getStringExtra("contactName");
+//		((TextView) findViewById(R.id.contact_name)).setText(contactName);
+		ListView userNameView = (ListView) findViewById(R.id.user_name_list);
+		ArrayList<String> userNames = new ArrayList<String>();
+		userNames.add(contactName);
+		ListAdapter userNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNames);
+		userNameView.setAdapter(userNameAdapter);		
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		// Loading contact name
-		String contactName = getIntent().getStringExtra("contactName");
-		((TextView) findViewById(R.id.contact_name)).setText(contactName);
-		Toast.makeText(this, "Nombre del contacto " + contactName,
-				Toast.LENGTH_SHORT).show();
+		//Loading phones
+		ArrayList<String> phones = getIntent().getStringArrayListExtra("phones");
+		ListView phonesView = (ListView) findViewById(R.id.phones_list);
+		ListAdapter phonesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1	, phones);
+		phonesView.setAdapter(phonesAdapter);
 		
 		//Loading phones
-		ArrayList<String> telefonos = getIntent().getStringArrayListExtra("telefonos");
-		ListView phones = (ListView) findViewById(R.id.phones_list);
-		ListAdapter phonesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, telefonos);
-		phones.setAdapter(phonesAdapter);
+		ArrayList<String> mails = getIntent().getStringArrayListExtra("mails");
+		ListView mailsView = (ListView) findViewById(R.id.mails_list);
+		ListAdapter mailsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mails);
+		mailsView.setAdapter(mailsAdapter);
 	}
 
 	/**
@@ -44,6 +56,7 @@ public class ActivityContactProfile extends Activity {
 	private void setupActionBar() {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(contactName);
 
 	}
 

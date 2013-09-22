@@ -32,27 +32,32 @@ public class FragmentTabContactos extends ListFragment implements
 			"Odessa Moline", "Lou Dargan", "Aron Redfern", "Pa Tierney",
 			"Maryanna Lone", "Shannan Seiber", "Velia Cao", "Gwendolyn Devens", };
 	// Mock teléfonos
-	private static ArrayList<String> telefonos;
+	private static ArrayList<String> phones;
 	static {
-		telefonos = new ArrayList<String>();
-		telefonos.add("+5491234567890");
-		telefonos.add("+1234567890123");
+		phones = new ArrayList<String>();
+		phones.add("+5491234567890");
+		phones.add("+1234567890123");
 	}
+	// Mock mails
+		private static ArrayList<String> mails;
+		static {
+			mails = new ArrayList<String>();
+			mails.add("mail1@mail.com");
+			mails.add("another@mail.com");
+		}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.fragmenttab_contactos, container,
 				false);
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		// Establecemos el Adapter a la Lista del Fragment
 		setListAdapter(new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, contactos));
 	}
@@ -63,7 +68,8 @@ public class FragmentTabContactos extends ListFragment implements
 
 		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
 		intent.putExtra("contactName", contactos[position]);
-		intent.putStringArrayListExtra("telefonos", telefonos);
+		intent.putStringArrayListExtra("phones", phones);
+		intent.putStringArrayListExtra("mails", mails);
 		startActivity(intent);
 	}
 
@@ -74,7 +80,7 @@ public class FragmentTabContactos extends ListFragment implements
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		ft.remove(mFragment);
+		ft.detach(mFragment);
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {

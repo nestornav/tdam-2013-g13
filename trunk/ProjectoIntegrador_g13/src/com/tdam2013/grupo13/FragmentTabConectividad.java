@@ -26,9 +26,7 @@ public class FragmentTabConectividad extends Fragment implements ActionBar.TabLi
     }
  
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        // Remove fragment3.xml layout
-        ft.remove(mFragment);
+    	ft.detach(mFragment);
     }
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
