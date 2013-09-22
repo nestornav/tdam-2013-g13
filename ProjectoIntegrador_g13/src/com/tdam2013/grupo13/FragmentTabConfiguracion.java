@@ -23,7 +23,7 @@ public class FragmentTabConfiguracion extends Fragment implements ActionBar.TabL
     }
  
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        ft.remove(mFragment);
+    	ft.detach(mFragment);
     }
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {

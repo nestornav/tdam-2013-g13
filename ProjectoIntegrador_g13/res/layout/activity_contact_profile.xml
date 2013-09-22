@@ -11,23 +11,28 @@
     <ImageView
         android:id="@+id/imageViewContactPicture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" 
+        android:contentDescription="@string/profile_picture"/>
 
-    <TextView
-        android:id="@+id/contact_name"
+    <ListView
+        android:id="@+id/user_name_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageViewContactPicture"
-        android:layout_below="@+id/imageViewContactPicture"
-        android:text="Contact Name" />
+        android:layout_below="@+id/imageViewContactPicture" />
     
     <ListView
         android:id="@+id/phones_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/contact_name" />
+        android:layout_below="@+id/user_name_list" />
+    
+    <ListView
+        android:id="@+id/mails_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phones_list" />
 
 </RelativeLayout>

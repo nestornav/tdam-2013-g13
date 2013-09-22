@@ -5,8 +5,9 @@ import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
+import android.app.ListFragment;
  
-public class FragmentTabHistorial extends Fragment implements ActionBar.TabListener {
+public class FragmentTabHistorial extends ListFragment implements ActionBar.TabListener {
  
     private Fragment mFragment;
  
@@ -17,13 +18,13 @@ public class FragmentTabHistorial extends Fragment implements ActionBar.TabListe
     }
  
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        mFragment = new FragmentTabHistorial();
+    	mFragment = new FragmentTabHistorial();
         ft.add(android.R.id.content, mFragment);
         ft.attach(mFragment);
     }
  
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        ft.remove(mFragment);
+    	ft.detach(mFragment);
     }
  
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
