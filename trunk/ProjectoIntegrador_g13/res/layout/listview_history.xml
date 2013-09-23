@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/contact_name"
         android:layout_toRightOf="@+id/imageViewHistoryType"
-        android:text="10/04/2013 23:22" />
+        android:text="10/04/2013 23:22"
+        android:gravity="right" />
     
 </RelativeLayout>

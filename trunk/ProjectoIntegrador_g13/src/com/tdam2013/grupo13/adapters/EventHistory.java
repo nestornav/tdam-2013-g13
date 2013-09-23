@@ -1,12 +1,12 @@
 package com.tdam2013.grupo13.adapters;
 
-public class HistoryEvent {
+public class EventHistory {
 
 	private String dateTime;
 	private String contact;
 	private HistoryEventType type;
 	
-	public HistoryEvent(String dateTime, String contact, HistoryEventType type) {
+	public EventHistory(String dateTime, String contact, HistoryEventType type) {
 		super();
 		this.dateTime = dateTime;
 		this.contact = contact;

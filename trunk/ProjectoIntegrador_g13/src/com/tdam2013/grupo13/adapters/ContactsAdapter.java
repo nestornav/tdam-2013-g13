@@ -7,32 +7,34 @@ import com.tdam2013.grupo13.R;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.QuickContactBadge;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class AdapterHistoryList extends BaseAdapter{
+public class ContactsAdapter extends BaseAdapter{
 	
-	private List<HistoryEvent> events;
+	private List<String> contacts;
 	private Activity activity;
 
-	public AdapterHistoryList(Activity activity, List<HistoryEvent> events){
+	public ContactsAdapter(Activity activity, List<String> contacts){
 		super();
 		this.activity = activity;
-		this.events = events;
+		this.contacts = contacts;
 	}
 
 	@Override
 	public int getCount() {
-		return events.size();
+		return contacts.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return events.get(position);
+		return contacts.get(position);
 	}
 
 	@Override
@@ -42,14 +44,17 @@ public class AdapterHistoryList extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		HistoryEvent event = events.get(position);
+		String contact = contacts.get(position);
 		if (convertView == null){
-			convertView = activity.getLayoutInflater().inflate(R.layout.listview_history, null);
+			convertView = activity.getLayoutInflater().inflate(R.layout.listview_contacts, null);
 		}
 		TextView contactName = (TextView) convertView.findViewById(R.id.contact_name);
-		TextView dateTime = (TextView) convertView.findViewById(R.id.date_time);
-		contactName.setText(event.getContact());
-		dateTime.setText(event.getDateTime());
+		contactName.setText(contact);
+		
+		QuickContactBadge badgeSmall = (QuickContactBadge) convertView.findViewById(R.id.badge_small);  
+		badgeSmall.assignContactFromEmail("any@gmail.com", true);  
+		badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
+		
 		return convertView;
 	}
 
