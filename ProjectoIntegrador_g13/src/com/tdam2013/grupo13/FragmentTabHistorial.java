@@ -1,12 +1,17 @@
 package com.tdam2013.grupo13;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Random;
 
-import com.tdam2013.grupo13.adapters.AdapterHistoryList;
-import com.tdam2013.grupo13.adapters.HistoryEvent;
-import com.tdam2013.grupo13.adapters.HistoryEvent.HistoryEventType;
+import com.tdam2013.grupo13.adapters.EventHistoryAdapter;
+import com.tdam2013.grupo13.adapters.EventHistory;
+import com.tdam2013.grupo13.adapters.EventHistory.HistoryEventType;
 
 import android.os.Bundle;
+import android.renderscript.Sampler.Value;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,34 +23,28 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar;
 import android.app.ListFragment;
 import android.content.Intent;
- 
-public class FragmentTabHistorial extends ListFragment implements ActionBar.TabListener {
+
+public class FragmentTabHistorial extends ListFragment implements
+		ActionBar.TabListener {
 	private Fragment mFragment;
 
 	// Mock de eventos
-	private static ArrayList<HistoryEvent> events;
+	private static ArrayList<EventHistory> events;
 	static {
-		events = new ArrayList<HistoryEvent>();
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
-		events.add(new HistoryEvent("13/03/99 22:11", "Jhon Smith", HistoryEventType.CALL));
-		events.add(new HistoryEvent("23/11/86 05:55", "Albert Einstein", HistoryEventType.SMS));
+		events = new ArrayList<EventHistory>();
+		Random ran = new Random();
+		HistoryEventType[] types = HistoryEventType.values();
+		int n = types.length;
+		HashSet<String> contactos = new HashSet<String>(
+				Arrays.asList(FragmentTabContactos.contactos));
+
+		for (int i = 0; i < 3; i++) {
+			for (String contactName : contactos) {
+				HistoryEventType type = types[ran.nextInt(n)];
+				events.add(new EventHistory(new Date().toLocaleString(),
+						contactName, type));
+			}
+		}
 	}
 
 	@Override
@@ -59,18 +58,19 @@ public class FragmentTabHistorial extends ListFragment implements ActionBar.TabL
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setListAdapter(new AdapterHistoryList(getActivity(), events));
+		setListAdapter(new EventHistoryAdapter(getActivity(), events));
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-//		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
-//		intent.putExtra("contactName", contactos[position]);
-//		intent.putStringArrayListExtra("phones", events);
-//		intent.putStringArrayListExtra("mails", mails);
-//		startActivity(intent);
+		// Intent intent = new Intent(getActivity(),
+		// ActivityContactProfile.class);
+		// intent.putExtra("contactName", contactos[position]);
+		// intent.putStringArrayListExtra("phones", events);
+		// intent.putStringArrayListExtra("mails", mails);
+		// startActivity(intent);
 	}
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {

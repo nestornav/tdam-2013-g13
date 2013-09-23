@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import com.tdam2013.grupo13.adapters.ContactsAdapter;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
@@ -25,7 +27,7 @@ public class FragmentTabContactos extends ListFragment implements
 	private Fragment mFragment;
 
 	// Mock de nombres
-	private String[] contactos = { "Alonzo Tavernier", "Julieta Stockstill",
+	public static String[] contactos = { "Alonzo Tavernier", "Julieta Stockstill",
 			"Shona Blessing", "Bruno Paneto", "Fonda Zilnicki",
 			"Oneida Flickinger", "Obdulia Blunt", "Jona Swiney",
 			"Clinton Decamp", "Patricia Hunley", "Brenda Owens", "Lue Wind",
@@ -58,8 +60,7 @@ public class FragmentTabContactos extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setListAdapter(new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, contactos));
+		setListAdapter(new ContactsAdapter(getActivity(), Arrays.asList(contactos)));
 	}
 
 	@Override
