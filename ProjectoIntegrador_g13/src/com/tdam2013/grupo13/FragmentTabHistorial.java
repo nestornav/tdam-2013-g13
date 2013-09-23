@@ -1,34 +1,84 @@
 package com.tdam2013.grupo13;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
 import android.app.ListFragment;
+import android.content.Intent;
  
 public class FragmentTabHistorial extends ListFragment implements ActionBar.TabListener {
- 
-    private Fragment mFragment;
- 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getActivity().setContentView(R.layout.fragmenttab_historial);
-    }
- 
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-    	mFragment = new FragmentTabHistorial();
-        ft.add(android.R.id.content, mFragment);
-        ft.attach(mFragment);
-    }
- 
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-    	ft.detach(mFragment);
-    }
- 
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-    	ft.attach(mFragment);
-    }
- 
+	private Fragment mFragment;
+
+	// Mock de nombres
+	private String[] contactos = { "Alonzo Tavernier", "Julieta Stockstill",
+			"Shona Blessing", "Bruno Paneto", "Fonda Zilnicki",
+			"Oneida Flickinger", "Obdulia Blunt", "Jona Swiney",
+			"Clinton Decamp", "Patricia Hunley", "Brenda Owens", "Lue Wind",
+			"Odessa Moline", "Lou Dargan", "Aron Redfern", "Pa Tierney",
+			"Maryanna Lone", "Shannan Seiber", "Velia Cao", "Gwendolyn Devens", };
+	// Mock teléfonos
+	private static ArrayList<String> phones;
+	static {
+		phones = new ArrayList<String>();
+		phones.add("+5491234567890");
+		phones.add("+1234567890123");
+	}
+	// Mock mails
+		private static ArrayList<String> mails;
+		static {
+			mails = new ArrayList<String>();
+			mails.add("mail1@mail.com");
+			mails.add("another@mail.com");
+		}
+	
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.fragmenttab_contactos, container,
+				false);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setListAdapter(new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, contactos));
+	}
+
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+
+		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
+		intent.putExtra("contactName", contactos[position]);
+		intent.putStringArrayListExtra("phones", phones);
+		intent.putStringArrayListExtra("mails", mails);
+		startActivity(intent);
+	}
+
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		mFragment = new FragmentTabContactos();
+		ft.add(android.R.id.content, mFragment);
+		ft.attach(mFragment);
+	}
+
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		ft.detach(mFragment);
+	}
+
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+
+	}
+
 }
