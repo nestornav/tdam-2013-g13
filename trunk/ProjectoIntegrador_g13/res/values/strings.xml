@@ -11,5 +11,6 @@
     <string name="title_activity_activity_contact_profile">ActivityContactProfile</string>
     <string name="contact_name">contact_name</string>
     <string name="profile_picture">profile picture</string>
+    <string name="history_type">history type logo</string>
 
 </resources>
