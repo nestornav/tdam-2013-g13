@@ -91,16 +91,6 @@ public class FragmentTabContactos extends ListFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedState) {
 	    super.onActivityCreated(savedState);
-//
-//	    getListView().setOnItemLongClickListener(AdapterView.OnItemLongClickListener {
-//
-//	        @Override
-//	        public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-//	                int arg2, long arg3) {
-//	            Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
-//	            return true;
-//	        }
-//	    };
 
 	    getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
