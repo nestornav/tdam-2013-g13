@@ -17,6 +17,7 @@ import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -61,16 +62,15 @@ public class FragmentTabContactos extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		setListAdapter(new ContactsAdapter(getActivity(), Arrays.asList(contactos)));
+		
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
+		Intent intent = new Intent(getActivity(), WebMessageActivity.class);
 		intent.putExtra("contactName", contactos[position]);
-		intent.putStringArrayListExtra("phones", phones);
-		intent.putStringArrayListExtra("mails", mails);
 		startActivity(intent);
 	}
 
@@ -87,5 +87,36 @@ public class FragmentTabContactos extends ListFragment implements
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedState) {
+	    super.onActivityCreated(savedState);
+//
+//	    getListView().setOnItemLongClickListener(AdapterView.OnItemLongClickListener {
+//
+//	        @Override
+//	        public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+//	                int arg2, long arg3) {
+//	            Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
+//	            return true;
+//	        }
+//	    };
 
+	    getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int pos, long id) {
+
+				Intent intent = new Intent(getActivity(), ActivityContactProfile.class);
+				intent.putExtra("contactName", contactos[pos]);
+				intent.putStringArrayListExtra("phones", phones);
+				intent.putStringArrayListExtra("mails", mails);
+				startActivity(intent);
+				
+				return true;
+			}
+		});
+		
+	}
 }
