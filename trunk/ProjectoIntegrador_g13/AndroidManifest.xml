@@ -28,6 +28,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tdam2013.grupo13.MainActivity" />
         </activity>
+        <activity
+            android:name="com.tdam2013.grupo13.WebMessageActivity"
+            android:label="@string/title_activity_web_message" >
+        </activity>
     </application>
 
 </manifest>

@@ -12,5 +12,7 @@
     <string name="contact_name">contact_name</string>
     <string name="profile_picture">profile picture</string>
     <string name="history_type">history type logo</string>
+    <string name="title_activity_web_message">WebMessageActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
