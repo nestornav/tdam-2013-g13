@@ -1,5 +1,7 @@
 package com.tdam2013.grupo13.adapters;
 
+import com.tdam2013.grupo13.R;
+
 public class EventHistory {
 
 	private String dateTime;
@@ -38,6 +40,20 @@ public class EventHistory {
 	}
 
 	public enum HistoryEventType {
-		CALL, SMS, EMAIL, WEB_MESSAGE;
+		CALL(R.drawable.call_ico), SMS(R.drawable.sms_ico), EMAIL(R.drawable.mail_ico), WEB_MESSAGE(R.drawable.web_ico);
+		
+		HistoryEventType(int imageID){
+			this.imageID = imageID;
+		}
+
+		private int imageID;
+		
+		public int getImageID() {
+			return this.imageID;
+		}
+	}
+
+	public int getImageID() {
+		return this.type.getImageID();
 	}
 }
