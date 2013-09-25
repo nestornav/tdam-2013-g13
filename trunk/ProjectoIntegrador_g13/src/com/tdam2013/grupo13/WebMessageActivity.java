@@ -1,15 +1,21 @@
 package com.tdam2013.grupo13;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import com.tdam2013.grupo13.adapters.WebMessage;
+import com.tdam2013.grupo13.adapters.WebMessageAdapter;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class WebMessageActivity extends Activity {
 
@@ -23,12 +29,14 @@ public class WebMessageActivity extends Activity {
 		// Loading contact name
 		contactName = getIntent().getStringExtra("contactName");
 		ListView userNameView = (ListView) findViewById(R.id.msgs_list);
-		ArrayList<String> userNames = new ArrayList<String>();
+		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
 		for (int i = 0; i < 100; i++) {
-			userNames.add(contactName);	
+			messages.add(new WebMessage(new Date().toLocaleString(), contactName));	
 		}
-		ListAdapter userNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNames);
-		userNameView.setAdapter(userNameAdapter);		
+		ListAdapter webMessageAdapter = new WebMessageAdapter(this, messages);
+		
+		
+		userNameView.setAdapter(webMessageAdapter);		
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
