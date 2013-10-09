@@ -3,13 +3,14 @@ package com.tdam2013.grupo13;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.Menu;
  
 public class MainActivity extends Activity {
     // Declare Tab Variable
     Tab tab;
- 
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
