@@ -1,5 +1,6 @@
 package com.tdam2013.grupo13.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tdam2013.grupo13.R;
@@ -18,10 +19,10 @@ import android.widget.TextView;
 
 public class ContactsAdapter extends BaseAdapter{
 	
-	private List<String> contacts;
+	private List<Contact> contacts;
 	private Activity activity;
 
-	public ContactsAdapter(Activity activity, List<String> contacts){
+	public ContactsAdapter(Activity activity, ArrayList<Contact> contacts){
 		super();
 		this.activity = activity;
 		this.contacts = contacts;
@@ -44,16 +45,16 @@ public class ContactsAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		String contact = contacts.get(position);
+		Contact contact = (Contact)contacts.get(position);
 		if (convertView == null){
 			convertView = activity.getLayoutInflater().inflate(R.layout.listview_contacts, null);
 		}
 		TextView contactName = (TextView) convertView.findViewById(R.id.contact_name);
-		contactName.setText(contact);
+		contactName.setText(contact.getName());
 		
 		QuickContactBadge badgeSmall = (QuickContactBadge) convertView.findViewById(R.id.badge_small);  
-		badgeSmall.assignContactFromEmail("any@gmail.com", true);  
-		badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
+		//badgeSmall.assignContactFromEmail("any@gmail.com", true);  
+		//badgeSmall.setMode(ContactsContract.QuickContact.MODE_SMALL);
 		
 		return convertView;
 	}

@@ -35,7 +35,7 @@ public class FragmentTabHistorial extends ListFragment implements
 		Random ran = new Random();
 		HistoryEventType[] types = HistoryEventType.values();
 		int n = types.length;
-		HashSet<String> contactos = new HashSet<String>(
+		/*HashSet<String> contactos = new HashSet<String>(
 				Arrays.asList(FragmentTabContactos.contactos));
 
 		for (int i = 0; i < 3; i++) {
@@ -44,7 +44,7 @@ public class FragmentTabHistorial extends ListFragment implements
 				events.add(new EventHistory(new Date().toLocaleString(),
 						contactName, type));
 			}
-		}
+		}*/
 	}
 
 	@Override
