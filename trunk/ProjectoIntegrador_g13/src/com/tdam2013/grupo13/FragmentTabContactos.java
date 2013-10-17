@@ -1,11 +1,6 @@
 package com.tdam2013.grupo13;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-
-import com.tdam2013.grupo13.adapters.Contact;
-import com.tdam2013.grupo13.adapters.ContactsAdapter;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -17,17 +12,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class FragmentTabContactos extends ListFragment implements
-		ActionBar.TabListener {
+import com.tdam2013.grupo13.adapters.Contact;
+import com.tdam2013.grupo13.adapters.ContactsAdapter;
+
+public class FragmentTabContactos extends ListFragment {
 
 	private Fragment mFragment;
 	private ArrayList<Contact> contactos;
@@ -56,6 +50,10 @@ public class FragmentTabContactos extends ListFragment implements
 		}
 	*/
 
+	public FragmentTabContactos(){
+		this.contactos = new ArrayList<Contact>();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -80,19 +78,19 @@ public class FragmentTabContactos extends ListFragment implements
 		startActivity(intent);
 	}
 
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		mFragment = new FragmentTabContactos();
-		ft.add(android.R.id.content, mFragment);
-		ft.attach(mFragment);
-	}
-
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		ft.detach(mFragment);
-	}
-
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-
-	}
+//	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+//		mFragment = new FragmentTabContactos();
+//		ft.add(android.R.id.content, mFragment);
+//		ft.attach(mFragment);
+//	}
+//
+//	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+//		ft.detach(mFragment);
+//	}
+//
+//	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+//
+//	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedState) {

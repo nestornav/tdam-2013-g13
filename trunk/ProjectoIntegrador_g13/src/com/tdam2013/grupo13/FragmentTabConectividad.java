@@ -16,7 +16,7 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar;
 import android.app.ListFragment;
  
-public class FragmentTabConectividad extends ListFragment implements ActionBar.TabListener {
+public class FragmentTabConectividad extends ListFragment {
  
     private Fragment mFragment;
  
@@ -39,21 +39,21 @@ public class FragmentTabConectividad extends ListFragment implements ActionBar.T
 				false);
 	}
     
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-        mFragment = new FragmentTabConectividad();
-        // Attach fragment3.xml layout
-        ft.add(android.R.id.content, mFragment);
-        ft.attach(mFragment);
-    }
- 
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-    	ft.detach(mFragment);
-    }
- 
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
- 
-    }
+//    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+//        // TODO Auto-generated method stub
+//        mFragment = new FragmentTabConectividad();
+//        // Attach fragment3.xml layout
+//        ft.add(android.R.id.content, mFragment);
+//        ft.attach(mFragment);
+//    }
+// 
+//    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+//    	ft.detach(mFragment);
+//    }
+// 
+//    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+//        // TODO Auto-generated method stub
+// 
+//    }
  
 }
