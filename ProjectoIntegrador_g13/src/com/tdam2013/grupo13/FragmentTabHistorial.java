@@ -24,8 +24,7 @@ import android.app.ActionBar;
 import android.app.ListFragment;
 import android.content.Intent;
 
-public class FragmentTabHistorial extends ListFragment implements
-		ActionBar.TabListener {
+public class FragmentTabHistorial extends ListFragment  {
 	private Fragment mFragment;
 
 	// Mock de eventos
@@ -71,20 +70,6 @@ public class FragmentTabHistorial extends ListFragment implements
 		// intent.putStringArrayListExtra("phones", events);
 		// intent.putStringArrayListExtra("mails", mails);
 		// startActivity(intent);
-	}
-
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		mFragment = new FragmentTabHistorial();
-		ft.add(android.R.id.content, mFragment);
-		ft.attach(mFragment);
-	}
-
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		ft.detach(mFragment);
-	}
-
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-
 	}
 
 }
