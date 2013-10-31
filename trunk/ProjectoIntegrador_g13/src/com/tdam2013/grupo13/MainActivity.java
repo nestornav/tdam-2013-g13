@@ -9,139 +9,124 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
 
-
- 
 public class MainActivity extends Activity {
-    // Declare Tab Variable
-    Tab tab;
-	private FragmentTabContactos tabContactos;
-    
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        
-//        actionBar.addTab(actionBar.newTab()
-//                .setText("Simple")
-//                .setTabListener(new TabListener<FragmentStack.CountingFragment>(
-//                        this, "simple", FragmentStack.CountingFragment.class)));
+	// Declare Tab Variable
+//	Tab tab;
+//	private FragmentTabContactos tabContactos;
 
-        actionBar.addTab(actionBar.newTab()
-                .setText("TabContactos")
-                .setTabListener(new TabListener<FragmentTabContactos>(
-                        this, "Contactos", FragmentTabContactos.class)));
- 
-        actionBar.addTab(actionBar.newTab()
-                .setText("TabHistorial")
-                .setTabListener(new TabListener<FragmentTabHistorial>(
-                        this, "Historial", FragmentTabHistorial.class)));
- 
-        actionBar.addTab(actionBar.newTab()
-                .setText("TabConectividad")
-                .setTabListener(new TabListener<FragmentTabConectividad>(
-                        this, "Conectividad", FragmentTabConectividad.class)));
-        
-        actionBar.addTab(actionBar.newTab()
-                .setText("TabConfiguracion")
-                .setTabListener(new TabListener<FragmentTabConfiguracion>(
-                        this, "Configuracion", FragmentTabConfiguracion.class)));
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, msenu);
-        return true;
-    }
-    
-    public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
-        private final Activity mActivity;
-        private final String mTag;
-        private final Class<T> mClass;
-        private final Bundle mArgs;
-        private Fragment mFragment;
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        public TabListener(Activity activity, String tag, Class<T> clz) {
-            this(activity, tag, clz, null);
-        }
+		actionBar.addTab(actionBar
+				.newTab()
+				.setText("Contactos")
+				.setTabListener(
+						new TabListener<FragmentTabContactos>(this,
+								"Contactos", FragmentTabContactos.class)));
 
-        public TabListener(Activity activity, String tag, Class<T> clz, Bundle args) {
-            mActivity = activity;
-            mTag = tag;
-            mClass = clz;
-            mArgs = args;
+		actionBar.addTab(actionBar
+				.newTab()
+				.setText("Historial")
+				.setTabListener(
+						new TabListener<FragmentTabHistorial>(this,
+								"Historial", FragmentTabHistorial.class)));
 
-            // Check to see if we already have a fragment for this tab, probably
-            // from a previously saved state.  If so, deactivate it, because our
-            // initial state is that a tab isn't shown.
-            mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
-            if (mFragment != null && !mFragment.isDetached()) {
-                FragmentTransaction ft = mActivity.getFragmentManager().beginTransaction();
-                ft.detach(mFragment);
-                ft.commit();
-            }
-        }
+		actionBar
+				.addTab(actionBar
+						.newTab()
+						.setText("Conectividad")
+						.setTabListener(
+								new TabListener<FragmentTabConectividad>(this,
+										"Conectividad",
+										FragmentTabConectividad.class)));
 
-        public void onTabSelected(Tab tab, FragmentTransaction ft) {
-            if (mFragment == null) {
-                mFragment = Fragment.instantiate(mActivity, mClass.getName(), mArgs);
-                ft.add(android.R.id.content, mFragment, mTag);
-            } else {
-                ft.attach(mFragment);
-            }
-        }
+		actionBar
+				.addTab(actionBar
+						.newTab()
+						.setText("Configuracion")
+						.setTabListener(
+								new TabListener<FragmentTabConfiguracion>(this,
+										"Configuracion",
+										FragmentTabConfiguracion.class)));
+	}
 
-        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-            if (mFragment != null) {
-                ft.detach(mFragment);
-            }
-        }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.main, msenu);
+		return true;
+	}
 
-        public void onTabReselected(Tab tab, FragmentTransaction ft) {
-            Toast.makeText(mActivity, "Reselected!", Toast.LENGTH_SHORT).show();
-        }
-    }
+	public static class TabListener<T extends Fragment> implements
+			ActionBar.TabListener {
+		private final Activity mActivity;
+		private final String mTag;
+		private final Class<T> mClass;
+		private final Bundle mArgs;
+		private Fragment mFragment;
 
-    
-    
-//    private class MyTabListener implements ActionBar.TabListener{
-//
-//		@Override
-//		public void onTabReselected(Tab tab, FragmentTransaction ft) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Override
-//		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//    	
-//    }
-    
-//    protected void showFragmentContactos(){
-//    	if(tabContactos == null){
-//    		this.tabContactos = new FragmentTabContactos();
-//    	}
-//    	showFragment(tabContactos);
-//    }
-//
-//	protected void showFragment(Fragment fragment) {
-//		FragmentTransaction ft = getFragmentManager().beginTransaction();
-//		ft.replace(R.id.layout_container, fragment);
-//		ft.addToBackStack(fragment.getClass().getName());
-//		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//		ft.commit();
-//	}
+		public TabListener(Activity activity, String tag, Class<T> clz) {
+			this(activity, tag, clz, null);
+		}
+
+		public TabListener(Activity activity, String tag, Class<T> clz,
+				Bundle args) {
+			mActivity = activity;
+			mTag = tag;
+			mClass = clz;
+			mArgs = args;
+
+			// Check to see if we already have a fragment for this tab, probably
+			// from a previously saved state. If so, deactivate it, because our
+			// initial state is that a tab isn't shown.
+			mFragment = mActivity.getFragmentManager().findFragmentByTag(mTag);
+			if (mFragment != null && !mFragment.isDetached()) {
+				FragmentTransaction ft = mActivity.getFragmentManager()
+						.beginTransaction();
+				ft.detach(mFragment);
+				ft.commit();
+			}
+		}
+
+		public void onTabSelected(Tab tab, FragmentTransaction ft) {
+			if (mFragment == null) {
+				mFragment = Fragment.instantiate(mActivity, mClass.getName(),
+						mArgs);
+				ft.add(android.R.id.content, mFragment, mTag);
+			} else {
+				ft.attach(mFragment);
+			}
+		}
+
+		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+			if (mFragment != null) {
+				ft.detach(mFragment);
+			}
+		}
+
+		public void onTabReselected(Tab tab, FragmentTransaction ft) {
+			Toast.makeText(mActivity, "Reselected!", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	// protected void showFragmentContactos(){
+	// if(tabContactos == null){
+	// this.tabContactos = new FragmentTabContactos();
+	// }
+	// showFragment(tabContactos);
+	// }
+	//
+	// protected void showFragment(Fragment fragment) {
+	// FragmentTransaction ft = getFragmentManager().beginTransaction();
+	// ft.replace(R.id.layout_container, fragment);
+	// ft.addToBackStack(fragment.getClass().getName());
+	// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+	// ft.commit();
+	// }
 }
