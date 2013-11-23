@@ -1,11 +1,15 @@
 package com.tdam2013.grupo13;
 
+import com.tdam2013.grupo13.utils.ActiveService;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -54,6 +58,8 @@ public class MainActivity extends Activity {
 								new TabListener<FragmentTabConfiguracion>(this,
 										"Configuracion",
 										FragmentTabConfiguracion.class)));
+		
+		startService(new Intent(this,ActiveService.class));	
 	}
 
 	@Override
