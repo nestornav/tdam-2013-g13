@@ -3,6 +3,8 @@ package com.tdam2013.grupo13.adapters;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -107,13 +109,15 @@ public class ContactsAdapter extends CursorAdapter {
          * The method loadContactPhotoThumbnail() is defined
          * in the section "Set the Contact URI and Thumbnail"
          */
-//        Bitmap thumbnailBitmap =
-//                loadContactPhotoThumbnail(photoData);
+        Bitmap thumbnailBitmap =
+                loadContactPhotoThumbnail(photoData);
         /*
          * Sets the image in the QuickContactBadge
          * QuickContactBadge inherits from ImageView
          */
-//        holder.quickcontact.setImageBitmap(thumbnailBitmap);
+        if(thumbnailBitmap != null){
+        	holder.quickcontact.setImageBitmap(thumbnailBitmap);
+        }
 	}
 	
 	 /**
@@ -125,6 +129,9 @@ public class ContactsAdapter extends CursorAdapter {
      * Returns null if the thumbnail is not found.
      */
     private Bitmap loadContactPhotoThumbnail(String photoData) {
+    	if(photoData == null){
+    		return BitmapFactory.decodeResource(context.getResources(), R.drawable.unknown);
+    	}
         // Creates an asset file descriptor for the thumbnail file.
         AssetFileDescriptor afd = null;
         // try-catch block for file not found
@@ -174,10 +181,12 @@ public class ContactsAdapter extends CursorAdapter {
                     fileDescriptor, null, null);
             }
         // If the file isn't found
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             /*
              * Handle file not found errors
              */
+        	Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        	return BitmapFactory.decodeResource(context.getResources(), R.drawable.unknown);
         // In all cases, close the asset file descriptor
         } finally {
             if (afd != null) {
