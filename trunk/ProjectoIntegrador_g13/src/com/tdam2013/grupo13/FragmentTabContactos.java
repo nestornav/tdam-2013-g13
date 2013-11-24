@@ -85,7 +85,7 @@ public class FragmentTabContactos extends ListFragment implements
 		super.onListItemClick(l, v, position, id);
 
 		Intent intent = new Intent(getActivity(), WebMessageActivity.class);
-		// intent.putExtra("contactName", contactos[position]);
+		intent.putExtra("contact", mContactsAdapter.getContactAt(position));
 		startActivity(intent);
 	}
 

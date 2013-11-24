@@ -3,6 +3,7 @@ package com.tdam2013.grupo13;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.tdam2013.grupo13.adapters.Contact;
 import com.tdam2013.grupo13.adapters.WebMessage;
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
 
@@ -19,19 +20,19 @@ import android.widget.TextView;
 
 public class WebMessageActivity extends Activity {
 
-	private String contactName;
+	private Contact contact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_message);
 		
-		// Loading contact name
-		contactName = getIntent().getStringExtra("contactName");
+		// Loading contact
+		contact = (Contact) getIntent().getSerializableExtra("contact");
 		ListView userNameView = (ListView) findViewById(R.id.msgs_list);
 		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
 		for (int i = 0; i < 100; i++) {
-			messages.add(new WebMessage(new Date().toLocaleString(), contactName));	
+			messages.add(new WebMessage(new Date().toLocaleString(), contact.getName()));	
 		}
 		ListAdapter webMessageAdapter = new WebMessageAdapter(this, messages);
 		
@@ -48,7 +49,7 @@ public class WebMessageActivity extends Activity {
 	private void setupActionBar() {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(contactName);
+		getActionBar().setTitle(contact.getName());
 
 	}
 
