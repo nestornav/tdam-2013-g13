@@ -197,5 +197,16 @@ public class ContactsAdapter extends CursorAdapter {
         }
         return null;
     }
+    
+    public Contact getContactAt(int position){
+    	Cursor cur = getCursor();
+    	Contact cont = null;
+    	if(cur.moveToPosition(position)){
+    		cont = new Contact();
+    		cont.setId(cur.getString(mIdIndex));
+    		cont.setName(cur.getString(mDisplayNameIndex));
+    	}
+    	return cont;
+    }
 
 }

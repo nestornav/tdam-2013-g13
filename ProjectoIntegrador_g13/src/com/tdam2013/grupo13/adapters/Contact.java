@@ -1,8 +1,9 @@
 package com.tdam2013.grupo13.adapters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Contact {
+public class Contact implements Serializable{
 	
 	private String id;
 	private String name;
@@ -18,6 +19,10 @@ public class Contact {
 		this.image = image;
 		this.emails = emails;
 		this.phones	= phones;
+	}
+
+	public Contact() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {
