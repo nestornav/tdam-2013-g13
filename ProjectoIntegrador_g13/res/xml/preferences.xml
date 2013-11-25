@@ -2,13 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
     <PreferenceCategory
-            android:title="inline_preferences">
+            android:title="@string/contacts_pref_title">
             
         <CheckBoxPreference
-                android:key="checkbox_preference"
-                android:title="title_checkbox_preference"
-                android:summary="summary_checkbox_preference" />
- 
+                android:key="contacts_pref_w_phone"
+                android:title="@string/contacts_pref_w_phone"
+                android:summary="@string/contacts_pref_w_phone_s" />
+ 		<CheckBoxPreference
+                android:key="contacts_pref_w_mail"
+                android:title="@string/contacts_pref_w_mail"
+                android:summary="@string/contacts_pref_w_mail_s" />
     </PreferenceCategory>
                 
     <PreferenceCategory
