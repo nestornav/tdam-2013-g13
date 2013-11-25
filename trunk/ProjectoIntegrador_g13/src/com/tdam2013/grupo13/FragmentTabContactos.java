@@ -125,58 +125,28 @@ public class FragmentTabContactos extends ListFragment implements
 				});
 	}
 
-//	public ArrayList<Contact> getContacts() {
-//		Contact contact = null;
-//		cr = getActivity().getContentResolver();
-//		Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
-//				null, null, null);
-//
-//		while (cur.moveToNext()) {
-//			String id = cur.getString(cur
-//					.getColumnIndex(ContactsContract.Contacts._ID));
-//			String name = cur.getString(cur
-//					.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//			ArrayList<Integer> phoneList = new ArrayList<Integer>();
-//
-//			if (Integer
-//					.parseInt(cur.getString(cur
-//							.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-//				Cursor pnCur = getActivity()
-//						.getContentResolver()
-//						.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//								null,
-//								ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-//										+ " = "
-//										+ cur.getString(cur
-//												.getColumnIndex(ContactsContract.Contacts._ID)),
-//								null, null);
-//				while (pnCur.moveToNext()) {
-//					phoneList.add(Integer.parseInt((pnCur.getString(pnCur
-//							.getColumnIndex("DATA1")))));
-//				}
-//				pnCur.close();
-//			}
-//
-//			cur.close();
-//
-//		}
-//		return contactos;
-//	}
-
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		 /*
 	     * Constructs search criteria from the search string
 	     * and email MIME type
 	     */
-		boolean wMail = sharedPreferences.getBoolean("contacts_pref_w_mail", true);
-	    String SELECTION = null;
+		boolean wPhone = sharedPreferences.getBoolean("contacts_pref_w_phone", true);
+	    String selection = null;
 	    String[] mSelectionArgs = null;
-//	    if(wMail){
-//	    	SELECTION = Contacts.HAS_PHONE_NUMBER + " = ?";
-//	    	mSelectionArgs = new String[]{ "1" };
-//	    }
-		return new CursorLoader(getActivity(), Contacts.CONTENT_URI, PROJECTION, SELECTION, mSelectionArgs, Contacts.DISPLAY_NAME + " ASC");
+	    if(wPhone){
+	    	selection = Contacts.HAS_PHONE_NUMBER + " = ?";
+	    	mSelectionArgs = new String[]{ "1" };
+	    }
+	    String order = sharedPreferences.getString("contacts_pref_order", "ASC");
+		return new CursorLoader(
+				getActivity(),
+				Contacts.CONTENT_URI,
+				PROJECTION,
+				selection,
+				mSelectionArgs,
+				Contacts.DISPLAY_NAME + " " + order
+		);
 	}
 
 	@Override
