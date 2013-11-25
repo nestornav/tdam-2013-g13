@@ -40,6 +40,8 @@ public class ContactsAdapter extends CursorAdapter {
     private int mDisplayNameIndex = 2;
     /* Column index of the photo data column. */
     private int mPhotoDataIndex =  3;
+    
+    private int mHasPhoneNumber = 4;
 	
 
 	private LayoutInflater mInflater;

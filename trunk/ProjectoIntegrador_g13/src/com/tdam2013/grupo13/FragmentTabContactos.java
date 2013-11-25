@@ -8,8 +8,10 @@ import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +35,13 @@ public class FragmentTabContactos extends ListFragment implements
 	 * Defines a projection based on platform version. This ensures that you
 	 * retrieve the correct columns.
 	 */
-	private static final String[] PROJECTION = { Contacts._ID,
-			Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME,
-			Contacts.PHOTO_THUMBNAIL_URI };
+	private static final String[] PROJECTION = { 
+		Contacts._ID,
+		Contacts.LOOKUP_KEY,
+		Contacts.DISPLAY_NAME,
+		Contacts.PHOTO_THUMBNAIL_URI,
+		Contacts.HAS_PHONE_NUMBER
+	};
 	/*
 	 * As a shortcut, defines constants for the column indexes in the Cursor.
 	 * The index is 0-based and always matches the column order in the
@@ -49,10 +55,14 @@ public class FragmentTabContactos extends ListFragment implements
 	private int mDisplayNameIndex = 2;
 	/* Column index of the photo data column. */
 	private int mPhotoDataIndex = 3;
+	
+	private int mHasPhoneNumber = 4;
 
 	private ListView mContactsList;
 
 	private ContactsAdapter mContactsAdapter;
+	
+	private SharedPreferences sharedPreferences;
 
 	public FragmentTabContactos() {
 	}
@@ -72,11 +82,8 @@ public class FragmentTabContactos extends ListFragment implements
 		 * Instantiates the subclass of CursorAdapter
 		 */
 		mContactsAdapter = new ContactsAdapter(getActivity());
-		/*
-		 * Gets a handle to the ListView in the file contact_list_layout.xml
-		 */
-//		mContactsList = (ListView) getActivity().findViewById(
-//				R.layout.listview_contacts);
+
+		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 	}
 
@@ -158,7 +165,18 @@ public class FragmentTabContactos extends ListFragment implements
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		return new CursorLoader(getActivity(), Contacts.CONTENT_URI, PROJECTION, null, null, Contacts.DISPLAY_NAME + " ASC");
+		 /*
+	     * Constructs search criteria from the search string
+	     * and email MIME type
+	     */
+		boolean wMail = sharedPreferences.getBoolean("contacts_pref_w_mail", true);
+	    String SELECTION = null;
+	    String[] mSelectionArgs = null;
+//	    if(wMail){
+//	    	SELECTION = Contacts.HAS_PHONE_NUMBER + " = ?";
+//	    	mSelectionArgs = new String[]{ "1" };
+//	    }
+		return new CursorLoader(getActivity(), Contacts.CONTENT_URI, PROJECTION, SELECTION, mSelectionArgs, Contacts.DISPLAY_NAME + " ASC");
 	}
 
 	@Override

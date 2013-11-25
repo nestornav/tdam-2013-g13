@@ -14,5 +14,11 @@
     <string name="history_type">history type logo</string>
     <string name="title_activity_web_message">WebMessageActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    
+	<!-- Preferences -->
+	<string name="contacts_pref_title">Contactos</string>
+	<string name="contacts_pref_w_phone">Con teléfono</string>
+	<string name="contacts_pref_w_phone_s">Mostrar contactos con teléfono</string>
+	<string name="contacts_pref_w_mail">Con e-mail</string>
+	<string name="contacts_pref_w_mail_s">Mostrar contactos con e-mail</string>
 </resources>
