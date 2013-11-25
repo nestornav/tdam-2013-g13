@@ -3,17 +3,30 @@
     
     <PreferenceCategory
             android:title="@string/contacts_pref_title">
-            
         <CheckBoxPreference
                 android:key="contacts_pref_w_phone"
                 android:title="@string/contacts_pref_w_phone"
                 android:summary="@string/contacts_pref_w_phone_s" />
- 		<CheckBoxPreference
-                android:key="contacts_pref_w_mail"
-                android:title="@string/contacts_pref_w_mail"
-                android:summary="@string/contacts_pref_w_mail_s" />
+ 		<ListPreference
+                android:key="contacts_pref_order"
+                android:title="@string/contacts_pref_order"
+                android:summary="@string/contacts_pref_order_s"
+                android:entries="@array/contacts_pref_entries"
+                android:entryValues="@array/contacts_pref_entry_values"
+                android:dialogTitle="@string/contacts_pref_order_dialog" />
     </PreferenceCategory>
-                
+
+    <PreferenceCategory
+            android:title="@string/history_pref_title">
+ 		<ListPreference
+                android:key="history_pref_order"
+                android:title="@string/history_pref_order"
+                android:summary="@string/history_pref_order_s"
+                android:entries="@array/history_pref_entries"
+                android:entryValues="@array/history_pref_entry_values"
+                android:dialogTitle="@string/history_pref_order_dialog" />
+    </PreferenceCategory>
+    
     <PreferenceCategory
             android:title="dialog_based_preferences">
  
@@ -22,14 +35,6 @@
                 android:title="title_edittext_preference"
                 android:summary="summary_edittext_preference"
                 android:dialogTitle="dialog_title_edittext_preference" />
-                
-        <ListPreference
-                android:key="list_preference"
-                android:title="title_list_preference"
-                android:summary="/summary_list_preference"
-                android:entries="@array/entries_list_preference"
-                android:entryValues="@array/entryvalues_list_preference"
-                android:dialogTitle="dialog_title_list_preference" />
  
     </PreferenceCategory>
  

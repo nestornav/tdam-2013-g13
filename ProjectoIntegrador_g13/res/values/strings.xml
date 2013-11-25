@@ -15,10 +15,17 @@
     <string name="title_activity_web_message">WebMessageActivity</string>
     <string name="hello_world">Hello world!</string>
     
-	<!-- Preferences -->
+<!-- Preferences -->
+	<!-- 	Contactos -->
 	<string name="contacts_pref_title">Contactos</string>
 	<string name="contacts_pref_w_phone">Con teléfono</string>
-	<string name="contacts_pref_w_phone_s">Mostrar contactos con teléfono</string>
-	<string name="contacts_pref_w_mail">Con e-mail</string>
-	<string name="contacts_pref_w_mail_s">Mostrar contactos con e-mail</string>
+	<string name="contacts_pref_w_phone_s">Mostrar sólo contactos con teléfono</string>
+	<string name="contacts_pref_order">Orden</string>
+	<string name="contacts_pref_order_s">Orden en que se muestran los contactos</string>
+	<string name="contacts_pref_order_dialog">Seleccione una opción:</string>
+	<!-- 	Hisotial -->
+	<string name="history_pref_title">Historial</string>
+	<string name="history_pref_order">Orden</string>
+	<string name="history_pref_order_s">Orden en que se muestra el historial</string>
+	<string name="history_pref_order_dialog">Seleccione una opción:</string>
 </resources>

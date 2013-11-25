@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="entries_list_preference"><item>item 1</item><item>item 2</item><item>item 3</item></array>
-    <array name="entryvalues_list_preference"><item>value 1</item><item>value 2</item><item>value 3</item></array>
+    <array name="contacts_pref_entries">
+        <item>Ascendente</item>
+        <item>Deschendente</item>
+    </array>
+    <array name="contacts_pref_entry_values">
+        <item>ASC</item>
+        <item>DESC</item>
+   	</array>
+   	<array name="history_pref_entries">
+        <item>Ascendente</item>
+        <item>Deschendente</item>
+    </array>
+    <array name="history_pref_entry_values">
+        <item>ASC</item>
+        <item>DESC</item>
+   	</array>
 </resources>
