@@ -19,8 +19,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.tdam2013.grupo13.adapters.Contact;
 import com.tdam2013.grupo13.adapters.ContactsAdapter;
+import com.tdam2013.grupo13.model.Contact;
 
 public class FragmentTabContactos extends ListFragment implements
 		LoaderManager.LoaderCallbacks<Cursor> {

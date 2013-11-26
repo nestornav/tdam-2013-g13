@@ -3,8 +3,9 @@ package com.tdam2013.grupo13.adapters;
 import java.util.List;
 
 import com.tdam2013.grupo13.R;
-import com.tdam2013.grupo13.adapters.ConnectionHistory.ConnectionHistoryStatus;
-import com.tdam2013.grupo13.adapters.EventHistory.HistoryEventType;
+import com.tdam2013.grupo13.model.ConnectionHistory;
+import com.tdam2013.grupo13.model.ConnectionHistory.ConnectionHistoryStatus;
+import com.tdam2013.grupo13.model.EventHistory.HistoryEventType;
 
 import android.app.Activity;
 import android.view.View;

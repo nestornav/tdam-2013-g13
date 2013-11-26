@@ -3,20 +3,18 @@ package com.tdam2013.grupo13;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.tdam2013.grupo13.adapters.Contact;
-import com.tdam2013.grupo13.adapters.WebMessage;
-import com.tdam2013.grupo13.adapters.WebMessageAdapter;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.tdam2013.grupo13.adapters.WebMessageAdapter;
+import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
+import com.tdam2013.grupo13.model.Contact;
+import com.tdam2013.grupo13.model.WebMessage;
 
 public class WebMessageActivity extends Activity {
 
@@ -26,6 +24,10 @@ public class WebMessageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_message);
+		
+		WebMessageServiceWrapper service = new WebMessageServiceWrapper(this);
+		service.registerUser("user", "pass");
+		
 		
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");

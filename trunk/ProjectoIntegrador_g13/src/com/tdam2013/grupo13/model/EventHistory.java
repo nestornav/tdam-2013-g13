@@ -1,4 +1,4 @@
-package com.tdam2013.grupo13.adapters;
+package com.tdam2013.grupo13.model;
 
 import com.tdam2013.grupo13.R;
 

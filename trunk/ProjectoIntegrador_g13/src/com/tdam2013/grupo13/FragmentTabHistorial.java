@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Random;
 
 import com.tdam2013.grupo13.adapters.EventHistoryAdapter;
-import com.tdam2013.grupo13.adapters.EventHistory;
-import com.tdam2013.grupo13.adapters.EventHistory.HistoryEventType;
+import com.tdam2013.grupo13.model.EventHistory;
+import com.tdam2013.grupo13.model.EventHistory.HistoryEventType;
 
 import android.os.Bundle;
 import android.renderscript.Sampler.Value;

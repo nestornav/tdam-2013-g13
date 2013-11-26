@@ -2,9 +2,9 @@ package com.tdam2013.grupo13;
 
 import java.util.ArrayList;
 
-import com.tdam2013.grupo13.adapters.ConnectionHistory;
-import com.tdam2013.grupo13.adapters.ConnectionHistory.ConnectionHistoryStatus;
 import com.tdam2013.grupo13.adapters.ConnectionHistoryAdapter;
+import com.tdam2013.grupo13.model.ConnectionHistory;
+import com.tdam2013.grupo13.model.ConnectionHistory.ConnectionHistoryStatus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
