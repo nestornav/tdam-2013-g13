@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tdam2013.grupo13.R;
+import com.tdam2013.grupo13.model.WebMessage;
 
 public class WebMessageAdapter extends BaseAdapter{
 	

@@ -16,6 +16,24 @@
     <string name="hello_world">Hello world!</string>
     
 <!-- Preferences -->
+	<!-- 	Messaging -->
+	<string name="messaging_pref_title">Servicio de mensajería</string>
+	
+	<string name="user_name_pref_title">Nombre de usuario</string>
+	<string name="user_name_pref_title_s">Nombre de usuario para el servicio de mensajes</string>
+	<string name="user_name_pref_dialog">Ingrese un nombre de usuario:</string>
+	
+	<string name="password_pref_title">Contraseña</string>
+	<string name="password_pref_title_s">Contraseña para el servicio de mensajes</string>
+	<string name="password_pref_dialog">Ingrese la contraseña:</string>
+	
+	<string name="register_pref_title">Registrar</string>
+	<string name="register_pref_title_s">Click para registrar usuario</string>
+	
+	<string name="service_url_pref_title">URL</string>
+	<string name="service_url_pref_title_s">URL del servicio de mensajes</string>
+	<string name="service_url_pref_dialog">Ingrese la URL:</string>
+	
 	<!-- 	Contactos -->
 	<string name="contacts_pref_title">Contactos</string>
 	<string name="contacts_pref_w_phone">Con teléfono</string>
@@ -28,4 +46,5 @@
 	<string name="history_pref_order">Orden</string>
 	<string name="history_pref_order_s">Orden en que se muestra el historial</string>
 	<string name="history_pref_order_dialog">Seleccione una opción:</string>
+	
 </resources>

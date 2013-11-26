@@ -23,6 +23,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import com.tdam2013.grupo13.R;
+import com.tdam2013.grupo13.model.Contact;
 
 public class ContactsAdapter extends CursorAdapter {
 	

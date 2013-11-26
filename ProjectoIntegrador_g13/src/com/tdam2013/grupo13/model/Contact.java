@@ -1,4 +1,4 @@
-package com.tdam2013.grupo13.adapters;
+package com.tdam2013.grupo13.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
