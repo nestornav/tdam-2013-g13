@@ -2,13 +2,16 @@ package com.tdam2013.grupo13.dataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseManager extends SQLiteOpenHelper {
 
+	private static String dbName = "DBG13";
+	
 	public DataBaseManager(Context context){
-		super(context,"DBG13",null,1);
+		super(context,dbName,null,1);
 	}
 
 	@Override
@@ -39,38 +42,79 @@ public class DataBaseManager extends SQLiteOpenHelper {
         onCreate(db);		
 	}
 	
-	public void insertConnectivityLog(int date, String connectivityType, String state){
+	public boolean insertConnectivityLog(int date, String connectivityType, String state){
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
-		
-		cv.put("date",date);
-		cv.put("connectivityType",connectivityType);
-		cv.put("state",state);
-		
-		db.insert("ConnectivityLog", "idConnectivity", cv);		
-		db.close();
+		try{
+			cv.put("date",date);
+			cv.put("connectivityType",connectivityType);
+			cv.put("state",state);
+			
+			db.insert("ConnectivityLog", "idConnectivity", cv);		
+			db.close();
+			return true;
+		}catch(Exception e){
+			db.close();
+			return false;
+		}		
 	}
 	
-	public void insertWebClient(String nickname){
+	public boolean insertWebClient(String nickname){
 		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-		
-		cv.put("userName",nickname);
-		
-		db.insert("WebUser", "idWebUser", cv);		
-		db.close();
+		ContentValues cv = new ContentValues();		
+		try{
+			cv.put("userName",nickname);
+			
+			db.insert("WebUser", "idWebUser", cv);		
+			db.close();	
+			return true;
+		}catch(Exception e){
+			db.close();
+			return false;
+		}		
 	}
 	
-	public void insertNewMessage(String senderName, String receiverName,int date, String message){
+	public boolean insertNewMessage(String senderName, String receiverName,int date, String message){
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
-		
-		cv.put("senderName",senderName);
-		cv.put("receiverName",receiverName);
-		cv.put("date",date);
-		cv.put("message",message);
-		
-		db.insert("WebMessage", "idWebMessage", cv);		
-		db.close();
+		try{
+			cv.put("senderName",senderName);
+			cv.put("receiverName",receiverName);
+			cv.put("date",date);
+			cv.put("message",message);
+			
+			db.insert("WebMessage", "idWebMessage", cv);		
+			db.close();
+			return true;
+		}catch(Exception e){
+			db.close();
+			return false;
+		}		
 	}	
+
+	public Cursor getConnectivityLog(){		
+		SQLiteDatabase db = getReadableDatabase();
+		try{
+			String query = "SELECT date, connectivityType, state FROM ConnectivityLog";
+			Cursor c = db.rawQuery(query,null);
+			db.close();
+			return c;
+		}catch(Exception e){
+			db.close();
+			return null;
+		}		
+	}
+	
+	public Cursor getMessageUser(String userId){		
+		SQLiteDatabase db = getReadableDatabase();
+		try{
+			String query = "SELECT receiverName, date, message FROM WebMessage WHERE senderName ="+ userId;
+			Cursor c = db.rawQuery(query,new String[]{userId});
+			db.close();
+			return c;
+		}catch(Exception e){
+			db.close();
+			return null;
+		}		
+	}
 }

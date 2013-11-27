@@ -1,5 +1,6 @@
 package com.tdam2013.grupo13;
 
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
 import com.tdam2013.grupo13.utils.ActiveService;
 
 import android.app.ActionBar;
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		DataBaseManager db = new DataBaseManager(MainActivity.this);
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
