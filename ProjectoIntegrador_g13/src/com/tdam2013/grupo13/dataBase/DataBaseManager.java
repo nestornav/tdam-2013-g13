@@ -74,7 +74,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 		}		
 	}
 	
-	public boolean insertNewMessage(String senderName, String receiverName,String date, String message){
+	public boolean insertNewMessage(String senderName, String receiverName,String date, String message){		
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		try{
@@ -93,24 +93,22 @@ public class DataBaseManager extends SQLiteOpenHelper {
 	}	
 
 	public Cursor getConnectivityLog(){		
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
+		
 		try{
 			String query = "SELECT date, connectivityType, state FROM ConnectivityLog";
-			Cursor c = db.rawQuery(query,null);
-			db.close();
+			Cursor c = db.rawQuery(query,null);	
 			return c;
-		}catch(Exception e){
-			db.close();
+		}catch(Exception e){			
 			return null;
 		}		
 	}
 	
 	public Cursor getMessageUser(String userId){		
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		try{
 			String query = "SELECT receiverName, date, message FROM WebMessage WHERE senderName ="+ userId;
-			Cursor c = db.rawQuery(query,new String[]{userId});
-			db.close();
+			Cursor c = db.rawQuery(query,new String[]{userId});			
 			return c;
 		}catch(Exception e){
 			db.close();

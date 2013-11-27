@@ -50,12 +50,15 @@ public class ConnectionHistoryAdapter extends BaseAdapter {
 		
 		ImageView imageStatus = (ImageView) connectioView.findViewById(R.id.image_connection);
 		TextView date = (TextView) connectioView.findViewById(R.id.connection_date);
+		TextView connectionStatus = (TextView) connectioView.findViewById(R.id.connection_status);
 		
 		ConnectionHistoryStatus status = connection.getConnectionStatus();		
 		switch (status) {
-		case CONNECTED: imageStatus.setImageResource(R.drawable.connection); 			
+		case CONNECTED: imageStatus.setImageResource(R.drawable.connection);
+						connectionStatus.setText("CONNECTED"); 
 						break;
 		case LOST : imageStatus.setImageResource(R.drawable.connection);
+					connectionStatus.setText("DESCONNECTED");
 					break;
 		}
 				
