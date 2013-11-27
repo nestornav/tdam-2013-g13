@@ -77,7 +77,7 @@ public class WebMessageServiceWrapper {
 		protected Boolean doInBackground(String... params) {
     		WebMessageClient client = new WebMessageClientSender(context);
 			String[]  result = client.execute(params);
-			return null;
+			return result[0].equals("success");
 		}
     	
     	@Override

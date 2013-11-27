@@ -5,8 +5,12 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParser;
 
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import com.tdam2013.grupo13.messaging.WebMessageClientRegister.ResultHandler;
 
 import android.content.Context;
 
@@ -33,9 +37,34 @@ public class WebMessageClientSender extends WebMessageClient {
 	}
 
 	@Override
-	public String[] parseResult(SAXParser parser, InputSource params)
-			throws SAXException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public String[] parseResult(SAXParser parser, InputSource is) throws SAXException, IOException {
+		ResultHandler handler = new ResultHandler();
+		parser.parse(is, handler);
+
+		return handler.getResult();
+
+	}
+
+//	-Resultado OK <result id="REQUEST_RANDOM_VALUE" type="success"></result>
+//	Ejemplo: <result type="success" id="REQUEST_RANDOM_VALUE"></result>
+//	-Resultado ERROR
+//	<result id="REQUEST_RANDOM_VALUE" type="error"><detail code="ERROR_CODE" description="ERROR_DESCRIPTION"/></result>
+//	Ejemplo: <result type="error" id="REQUEST_RANDOM_VALUE"><detail description="wrong username and password combination" code="12"></detail></result>
+	class ResultHandler extends DefaultHandler{
+		
+		String[] res = new String[1];
+		
+		public void startElement(String uri, String localName, String qName,
+                Attributes attributes) throws SAXException{
+			super.startElement(uri, localName, qName, attributes);
+			
+			if(localName.equalsIgnoreCase("result")){
+				res[0] = attributes.getValue("type");
+			}
+		}
+		
+		public String[] getResult(){
+			return res;
+		}
 	}
 }

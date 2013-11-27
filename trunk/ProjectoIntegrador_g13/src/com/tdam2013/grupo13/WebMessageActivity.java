@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -19,15 +23,26 @@ import com.tdam2013.grupo13.model.WebMessage;
 public class WebMessageActivity extends Activity {
 
 	private Contact contact;
+	private WebMessageServiceWrapper service;
+	private EditText editTextMdg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_message);
 		
-		WebMessageServiceWrapper service = new WebMessageServiceWrapper(this);
-		service.registerUser("user", "pass");
-		
+		service = new WebMessageServiceWrapper(this);
+		editTextMdg = (EditText) findViewById(R.id.editTextMsg);
+		Button sendButton = (Button) findViewById(R.id.buttonSendMsg);
+		sendButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String text = editTextMdg.getText().toString();
+				if(!text.equals("")){
+					service.sendMessage("usuario", "123456", contact.getName(), text);
+				}
+			}
+		});
 		
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");
