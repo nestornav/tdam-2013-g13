@@ -3,6 +3,7 @@ package com.tdam2013.grupo13.adapters;
 import java.util.List;
 
 import android.app.Activity;
+import android.location.Address;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,6 +21,11 @@ public class WebMessageAdapter extends BaseAdapter{
 		super();
 		this.activity = activity;
 		this.messages = messages;
+	}
+	
+	public void addItem(WebMessage item){
+		this.messages.add(item);
+		notifyDataSetChanged();
 	}
 
 	@Override
