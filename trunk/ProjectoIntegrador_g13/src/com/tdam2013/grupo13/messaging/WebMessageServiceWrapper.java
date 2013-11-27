@@ -1,15 +1,11 @@
 package com.tdam2013.grupo13.messaging;
 
-import java.util.Date;
-
-import com.tdam2013.grupo13.dataBase.DataBaseManager;
-import com.tdam2013.grupo13.notification.MyNotificationManager;
-
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
 
 public class WebMessageServiceWrapper {
 	
@@ -92,7 +88,7 @@ public class WebMessageServiceWrapper {
     		to = params[2];
     		message = params[3];
     		
-    		time = new Date().toGMTString();
+    		time = android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss", new java.util.Date()).toString();
     		
 			String[]  result = client.execute(params);
 			return result[0].equals("success");

@@ -56,17 +56,18 @@ public class FragmentTabConectividad extends ListFragment {
     	ConnectionHistory ch;
     	Cursor c = db.getConnectivityLog();
 //    	Toast.makeText(getActivity().getApplicationContext(), "Cant Regostrops"+c.getColumnCount(), Toast.LENGTH_SHORT).show();
-    	c.moveToFirst();
-    	while(c.moveToNext()){
-    		String status = c.getString(2);    		
-    		String date = c.getString(0);
-    		if(status.equals(ConnectionHistoryStatus.CONNECTED.toString())){
-    			ch = new ConnectionHistory(ConnectionHistoryStatus.CONNECTED, date);
-    		}else{
-    			ch = new ConnectionHistory(ConnectionHistoryStatus.LOST, date);
-    		}    		
-    		logs.add(ch);
-    	};
+    	if(c.moveToFirst()){
+	    	do{
+	    		String status = c.getString(2);    		
+	    		String date = c.getString(0);
+	    		if(status.equals(ConnectionHistoryStatus.CONNECTED.toString())){
+	    			ch = new ConnectionHistory(ConnectionHistoryStatus.CONNECTED, date);
+	    		}else{
+	    			ch = new ConnectionHistory(ConnectionHistoryStatus.LOST, date);
+	    		}    		
+	    		logs.add(ch);
+	    	}while(c.moveToNext());
+    	}
     	return logs;
     }
  
