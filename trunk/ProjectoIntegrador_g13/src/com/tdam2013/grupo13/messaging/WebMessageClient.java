@@ -4,12 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -36,15 +44,38 @@ public abstract class WebMessageClient {
 		String result = doPost(request);
 		logger.log(Level.INFO, "Result: " + result);
 		
-		String[] response = parseResult(result);
+		String[] response = parseTemplate(result);
 		logger.log(Level.INFO, "Result: " + response.toString());
 		
 		return response;
 	}
 	
+	private String[] parseTemplate(String result) {
+		try {
+			SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+			InputSource is = new InputSource(new StringReader(result));
+			
+			return parseResult(parser, is);
+
+		} catch (ParserConfigurationException e) {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
+					e.getMessage(), e);
+			e.printStackTrace();
+		} catch (SAXException e) {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
+					e.getMessage(), e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
+					e.getMessage(), e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public abstract String getRequest(String... params);
 	
-	public abstract String[] parseResult(String params);
+	public abstract String[] parseResult(SAXParser parser, InputSource params) throws SAXException, IOException;
 	
 	
 	private String doPost(String request) {

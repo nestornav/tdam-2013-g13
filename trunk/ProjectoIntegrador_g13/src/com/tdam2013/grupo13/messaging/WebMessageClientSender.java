@@ -1,6 +1,12 @@
 package com.tdam2013.grupo13.messaging;
 
+import java.io.IOException;
 import java.util.logging.Logger;
+
+import javax.xml.parsers.SAXParser;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import android.content.Context;
 
@@ -27,7 +33,8 @@ public class WebMessageClientSender extends WebMessageClient {
 	}
 
 	@Override
-	public String[] parseResult(String params) {
+	public String[] parseResult(SAXParser parser, InputSource params)
+			throws SAXException, IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
