@@ -3,6 +3,8 @@ package com.tdam2013.grupo13.utils;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
+
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -22,12 +24,12 @@ public class ActiveService extends Service {
 
 	private NetworkScanner _connectivityListener = new NetworkScanner();
 	private NetworkConnectivtyHandler _connectivityHandler = new NetworkConnectivtyHandler();
-
+	private DataBaseManager db;
 	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		System.out.println("ActiveService.onCreate!!");
+		db = new DataBaseManager(ActiveService.this);		
 	}
 	
 	@Override
@@ -89,36 +91,17 @@ public class ActiveService extends Service {
 
 			if (_connected == null || _connected != connected) {
 				_connected = connected;
-				if (connected) {
-					Log.i("Connection status", "Connection Available");
-					Toast.makeText(getApplicationContext(), "Conectado", Toast.LENGTH_SHORT).show();
+				if (connected) {					
+					boolean result  = db.insertConnectivityLog(new Date().toGMTString(), "3G", "CONNECTED");
+					Toast.makeText(getApplicationContext(), "Conectado"+result, Toast.LENGTH_SHORT).show();
 				} else {
 					Log.i("Connection status", "Connection Disconected");
+					db.insertConnectivityLog(new Date().toGMTString(), "3G", "LOST");
 					Toast.makeText(getApplicationContext(), "DESConectado", Toast.LENGTH_SHORT).show();
 				}
 				//Bundle data = new Bundle();
-				//data.putBoolean(Constants.EXTRA_NETWORK_CONNECTED, connected);
-				
+				//data.putBoolean(Constants.EXTRA_NETWORK_CONNECTED, connected);				
 			}
-			
-			
-	/*		boolean noConnectivity=msg.getData().getBoolean(Constantes.EXTRA_NO_CONNECTIVITY, false);
-  
-			//int networkInfo=msg.getData().getInt(Constantes.EXTRA_CONNECTIVITY_TYPE, -1);
-            //int conectividadEstado=noConnectivity? DatabaseHelper.CONECTIVITY_STATE_DISCONECTED:DatabaseHelper.CONECTIVITY_STATE_CONECTED;
-            //int conectividadTipo=DatabaseHelper.CONECTIVITY_TYPE_DISCONNECT;
-
-            if(networkInfo == ConnectivityManager.TYPE_WIFI)
-            {
-                    conectividadTipo=DatabaseHelper.CONECTIVITY_TYPE_WIFI;
-            }
-            else if(networkInfo == ConnectivityManager.TYPE_MOBILE)
-            {
-                    conectividadTipo=DatabaseHelper.CONECTIVITY_TYPE_NETWORK;
-            }
-
-//            dbHelper.insertarRegistroConectividad(Calendar.getInstance().getTime(), conectividadTipo, conectividadEstado);
-*/
 			
 			
 		}
