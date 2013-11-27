@@ -1,5 +1,6 @@
 package com.tdam2013.grupo13.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tdam2013.grupo13.R;
+import com.tdam2013.grupo13.model.ConnectionHistory;
 import com.tdam2013.grupo13.model.WebMessage;
 
 public class WebMessageAdapter extends BaseAdapter{
@@ -62,6 +64,11 @@ public class WebMessageAdapter extends BaseAdapter{
 		messageContent.setText(message.getMessage());
 		
 		return convertView;
+	}
+
+	public void update(ArrayList<WebMessage> webMessages) {
+		this.messages = webMessages;
+		notifyDataSetChanged();
 	}
 
 }
