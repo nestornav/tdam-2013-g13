@@ -3,6 +3,7 @@ package com.tdam2013.grupo13.adapters;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.ReceiverCallNotAllowedException;
 import android.location.Address;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,9 @@ public class WebMessageAdapter extends BaseAdapter{
 		if (convertView == null){
 			convertView = activity.getLayoutInflater().inflate(R.layout.listview_message, null);
 		}
+		
+		TextView reciverName = (TextView) convertView.findViewById(R.id.reciver_name);
+		reciverName.setText(message.getReceiverName());
 		
 		TextView dateTime = (TextView) convertView.findViewById(R.id.message_date_time);
 		dateTime.setText(message.getDateTime());

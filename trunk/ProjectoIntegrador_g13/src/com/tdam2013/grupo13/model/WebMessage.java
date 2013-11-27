@@ -4,12 +4,19 @@ public class WebMessage {
 
 	private String message;
 	private String dateTime;
+	private String receiverName;
+
+	public WebMessage(String dateTime, String message, String receiverName){
+		this.dateTime = dateTime;
+		this.message = message;
+		this.receiverName = receiverName;
+	}
 
 	public WebMessage(String dateTime, String message){
 		this.dateTime = dateTime;
-		this.message = message;
+		this.message = message;		
 	}
-
+	
 	public String getMessage() {
 		return message;
 	}
@@ -25,4 +32,12 @@ public class WebMessage {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}		
 }
