@@ -56,10 +56,10 @@ public class ConnectionHistoryAdapter extends BaseAdapter {
 		ConnectionHistoryStatus status = connection.getConnectionStatus();		
 		switch (status) {
 		case CONNECTED: imageStatus.setImageResource(R.drawable.connection);
-						connectionStatus.setText("CONNECTED"); 
+						connectionStatus.setText("Conexión"); 
 						break;
 		case LOST : imageStatus.setImageResource(R.drawable.connection);
-					connectionStatus.setText("DESCONNECTED");
+					connectionStatus.setText("Desconexión");
 					break;
 		}
 				
