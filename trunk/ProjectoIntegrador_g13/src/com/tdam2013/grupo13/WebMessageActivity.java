@@ -24,7 +24,8 @@ import com.tdam2013.grupo13.model.Contact;
 import com.tdam2013.grupo13.model.WebMessage;
 import com.tdam2013.grupo13.notification.MyNotificationManager;
 
-public class WebMessageActivity extends Activity implements WebMessageServiceListener {
+public class WebMessageActivity extends Activity implements
+		WebMessageServiceListener {
 
 	private Contact contact;
 	private WebMessageServiceWrapper service;
@@ -38,37 +39,39 @@ public class WebMessageActivity extends Activity implements WebMessageServiceLis
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_message);
-		
+
 		service = new WebMessageServiceWrapper(this, this);
 		editTextMdg = (EditText) findViewById(R.id.editTextMsg);
-		
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		user = prefs.getString("user_name_pref", "");
 		pass = prefs.getString("password_pref", "");
-		
+
 		Button sendButton = (Button) findViewById(R.id.buttonSendMsg);
 		sendButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String text = editTextMdg.getText().toString();
-				if(!text.equals("")){
+				if (!text.equals("")) {
 					service.sendMessage(user, pass, contact.getName(), text);
 				}
 			}
 		});
-		
+
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");
-		
+
 		listView = (ListView) findViewById(R.id.msgs_list);
 		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
-//		for (int i = 0; i < 100; i++) {
-//			messages.add(new WebMessage(new Date().toLocaleString(), contact.getName()));	
-//		}
-		
+		// for (int i = 0; i < 100; i++) {
+		// messages.add(new WebMessage(new Date().toLocaleString(),
+		// contact.getName()));
+		// }
+
 		webMessageAdapter = new WebMessageAdapter(this, messages);
-		listView.setAdapter(webMessageAdapter);		
-		
+		listView.setAdapter(webMessageAdapter);
+
 		// Show the Up button in the action bar.
 		setupActionBar();
 	}
@@ -109,10 +112,19 @@ public class WebMessageActivity extends Activity implements WebMessageServiceLis
 
 	@Override
 	public void onMessageSent(String message, String time) {
-		MyNotificationManager.notify(this, "Mensaje enviado", "Mensaje enviado a "+contact.getName());
+		MyNotificationManager.notify(this, "Mensaje enviado",
+				"Mensaje enviado a " + contact.getName());
 		editTextMdg.setText("");
 		webMessageAdapter.addItem(new WebMessage(time, message));
 	}
 
+	@Override
+	public void onMessageError(String message, String time) {
+		MyNotificationManager.notify(this, "Mensaje NO enviado",
+				"Imposible enviar el mensaje: \"" + message + "\" al contacto: "
+						+ contact.getName());
+		editTextMdg.setText("");
+		webMessageAdapter.addItem(new WebMessage(time, message));
+	}
 
 }
