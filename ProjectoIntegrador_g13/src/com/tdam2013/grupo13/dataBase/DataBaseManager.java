@@ -17,21 +17,21 @@ public class DataBaseManager extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE WebUser ("+
-					"idWebUser INTEGER PRIMARY KEY, "+
-					"userName TEXT");
+					"idWebUser INTEGER PRIMARY KEY , "+
+					"userName TEXT);");
 	
 		db.execSQL("CREATE TABLE WebMassage ("+
-					"idWebMessage INTEGER PRIMARY KEY, "+
-					"senderName TEXT, "+
-					"receiverName TEXT, "+
-					"date INTEGER, "+
-					"message TEXT");
+					"idWebMessage INTEGER PRIMARY KEY , "+
+					"senderName TEXT , "+
+					"receiverName TEXT , "+
+					"date TEXT , "+
+					"message TEXT);");
 		
 		db.execSQL("CREATE TABLE ConnectivityLog ("+
-					"idConnectivity INTEGER PRIMARY KEY, "+
-					"date INTEGER, "+
-					"connectivityType TEXT, "+					
-					"state TEXT"); 		
+					"idConnectivity INTEGER PRIMARY KEY , "+
+					"date TEXT , "+
+					"connectivityType TEXT , "+					
+					"state TEXT);"); 		
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
         onCreate(db);		
 	}
 	
-	public boolean insertConnectivityLog(int date, String connectivityType, String state){
+	public boolean insertConnectivityLog(String date, String connectivityType, String state){
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		try{
@@ -74,7 +74,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 		}		
 	}
 	
-	public boolean insertNewMessage(String senderName, String receiverName,int date, String message){
+	public boolean insertNewMessage(String senderName, String receiverName,String date, String message){
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		try{

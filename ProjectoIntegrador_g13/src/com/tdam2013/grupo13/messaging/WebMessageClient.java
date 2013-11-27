@@ -80,7 +80,7 @@ public abstract class WebMessageClient {
 	
 	private String doPost(String request) {
 		String urlStr = sharedPreferences.getString("service_url_pref",
-				"http://localhost:8080/MessageSender/");
+				"http://192.168.1.104:8080/MessageSender/");
 		logger.log(Level.INFO, "URL: " + urlStr);
 	
 		try{
