@@ -25,17 +25,24 @@ public class FragmentTabConectividad extends ListFragment {
     private DataBaseManager db;
     
     private static ArrayList<ConnectionHistory> connections;
-    static{
-    	connections = new ArrayList<ConnectionHistory>();
-    	connections.add(new ConnectionHistory( ConnectionHistoryStatus.CONNECTED,"12/09/12 15:55"));
-    	connections.add(new ConnectionHistory( ConnectionHistoryStatus.CONNECTED,"22/09/12 23:15"));
-    }
+	private ConnectionHistoryAdapter adapter;
+//    static{
+//    	connections = new ArrayList<ConnectionHistory>();
+//    	connections.add(new ConnectionHistory( ConnectionHistoryStatus.CONNECTED,"12/09/12 15:55"));
+//    	connections.add(new ConnectionHistory( ConnectionHistoryStatus.CONNECTED,"22/09/12 23:15"));
+//    }
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DataBaseManager(getActivity().getApplicationContext());
-        setListAdapter(new ConnectionHistoryAdapter(getActivity(), getConnectivityLog()));
+        adapter = new ConnectionHistoryAdapter(getActivity(), getConnectivityLog());
+        setListAdapter(adapter);
+    }
+    
+    public void onResume(){
+    	super.onResume();
+    	adapter.update(getConnectivityLog());
     }
  
     @Override
@@ -48,7 +55,7 @@ public class FragmentTabConectividad extends ListFragment {
     	ArrayList<ConnectionHistory> logs = new ArrayList<ConnectionHistory>();     	
     	ConnectionHistory ch;
     	Cursor c = db.getConnectivityLog();
-    	Toast.makeText(getActivity().getApplicationContext(), "Cant Regostrops"+c.getColumnCount(), Toast.LENGTH_SHORT).show();
+//    	Toast.makeText(getActivity().getApplicationContext(), "Cant Regostrops"+c.getColumnCount(), Toast.LENGTH_SHORT).show();
     	c.moveToFirst();
     	while(c.moveToNext()){
     		String status = c.getString(2);    		
@@ -62,22 +69,5 @@ public class FragmentTabConectividad extends ListFragment {
     	};
     	return logs;
     }
-    
-//    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-//        // TODO Auto-generated method stub
-//        mFragment = new FragmentTabConectividad();
-//        // Attach fragment3.xml layout
-//        ft.add(android.R.id.content, mFragment);
-//        ft.attach(mFragment);
-//    }
-// 
-//    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-//    	ft.detach(mFragment);
-//    }
-// 
-//    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-//        // TODO Auto-generated method stub
-// 
-//    }
  
 }

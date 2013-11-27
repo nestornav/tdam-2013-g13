@@ -1,5 +1,6 @@
 package com.tdam2013.grupo13.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tdam2013.grupo13.R;
@@ -64,6 +65,11 @@ public class ConnectionHistoryAdapter extends BaseAdapter {
 				
 		date.setText(connection.getDate());
 		return connectioView;
+	}
+
+	public void update(ArrayList<ConnectionHistory> connectivityLog) {
+		this.connections = connectivityLog;
+		notifyDataSetChanged();
 	}
 
 }
