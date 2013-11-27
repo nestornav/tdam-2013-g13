@@ -36,12 +36,12 @@ public class MainActivity extends Activity {
 						new TabListener<FragmentTabContactos>(this,
 								"Contactos", FragmentTabContactos.class)));
 
-//		actionBar.addTab(actionBar
-//				.newTab()
-//				.setText("Historial")
-//				.setTabListener(
-//						new TabListener<FragmentTabHistorial>(this,
-//								"Historial", FragmentTabHistorial.class)));
+		actionBar.addTab(actionBar
+				.newTab()
+				.setText("Historial")
+				.setTabListener(
+						new TabListener<FragmentTabHistorial>(this,
+								"Historial", FragmentTabHistorial.class)));
 
 		actionBar
 				.addTab(actionBar

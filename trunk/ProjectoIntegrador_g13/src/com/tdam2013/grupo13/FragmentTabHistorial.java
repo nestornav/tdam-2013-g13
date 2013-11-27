@@ -36,6 +36,8 @@ public class FragmentTabHistorial extends ListFragment  {
 	private static ArrayList<WebMessage> messages;
 	private DataBaseManager db;
 
+	private WebMessageAdapter adapter;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,9 +50,14 @@ public class FragmentTabHistorial extends ListFragment  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		db = new DataBaseManager(getActivity().getApplicationContext());
-		
-		setListAdapter(new WebMessageAdapter(getActivity(), getWebMessages()));
+		adapter = new WebMessageAdapter(getActivity(), getWebMessages());
+		setListAdapter(adapter);
 	}
+	
+	public void onResume(){
+    	super.onResume();
+    	adapter.update(getWebMessages());
+    }
 	
 	public ArrayList<WebMessage> getWebMessages(){
 		messages = new ArrayList<WebMessage>();

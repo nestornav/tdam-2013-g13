@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -91,16 +92,15 @@ public class ActiveService extends Service {
 
 			if (_connected == null || _connected != connected) {
 				_connected = connected;
+				String dateStr = android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss", new java.util.Date()).toString();
 				if (connected) {					
-					boolean result  = db.insertConnectivityLog(new Date().toGMTString(), "3G", "CONNECTED");
-					Toast.makeText(getApplicationContext(), "Conectado"+result, Toast.LENGTH_SHORT).show();
+					boolean result  = db.insertConnectivityLog(dateStr, "3G", "CONNECTED");
+					Toast.makeText(getApplicationContext(), "Conectado", Toast.LENGTH_SHORT).show();
 				} else {
 					Log.i("Connection status", "Connection Disconected");
-					db.insertConnectivityLog(new Date().toGMTString(), "3G", "LOST");
-					Toast.makeText(getApplicationContext(), "DESConectado", Toast.LENGTH_SHORT).show();
-				}
-				//Bundle data = new Bundle();
-				//data.putBoolean(Constants.EXTRA_NETWORK_CONNECTED, connected);				
+					db.insertConnectivityLog(dateStr, "3G", "LOST");
+					Toast.makeText(getApplicationContext(), "Desconectado", Toast.LENGTH_SHORT).show();
+				}				
 			}
 			
 			

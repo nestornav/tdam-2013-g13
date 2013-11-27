@@ -1,5 +1,7 @@
 package com.tdam2013.grupo13.model;
 
+import android.text.format.DateFormat;
+
 public class ConnectionHistory {
 		
 	private String date;
