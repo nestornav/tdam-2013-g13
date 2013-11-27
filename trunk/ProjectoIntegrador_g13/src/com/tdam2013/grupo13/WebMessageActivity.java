@@ -1,7 +1,6 @@
 package com.tdam2013.grupo13;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
@@ -34,6 +32,7 @@ public class WebMessageActivity extends Activity implements
 	private String pass;
 	private ListView listView;
 	private WebMessageAdapter webMessageAdapter;
+	private SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +42,12 @@ public class WebMessageActivity extends Activity implements
 		service = new WebMessageServiceWrapper(this, this);
 		editTextMdg = (EditText) findViewById(R.id.editTextMsg);
 
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
 		user = prefs.getString("user_name_pref", "");
 		pass = prefs.getString("password_pref", "");
+
 
 		Button sendButton = (Button) findViewById(R.id.buttonSendMsg);
 		sendButton.setOnClickListener(new OnClickListener() {
@@ -54,6 +55,8 @@ public class WebMessageActivity extends Activity implements
 			public void onClick(View v) {
 				String text = editTextMdg.getText().toString();
 				if (!text.equals("")) {
+					user = prefs.getString("user_name_pref", "").trim();
+					pass = prefs.getString("password_pref", "").trim();
 					service.sendMessage(user, pass, contact.getName(), text);
 				}
 			}

@@ -2,6 +2,7 @@ package com.tdam2013.grupo13.messaging;
 
 import java.util.Date;
 
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
 import com.tdam2013.grupo13.notification.MyNotificationManager;
 
 import android.app.NotificationManager;
@@ -72,6 +73,8 @@ public class WebMessageServiceWrapper {
 		ProgressDialog pDialog;
 		String message;
 		String time;
+		private String to;
+		private String from;
 		
 		@Override
         protected void onPreExecute(){
@@ -85,7 +88,10 @@ public class WebMessageServiceWrapper {
     	@Override
 		protected Boolean doInBackground(String... params) {
     		WebMessageClient client = new WebMessageClientSender(context);
+    		from = params[0];
+    		to = params[2];
     		message = params[3];
+    		
     		time = new Date().toGMTString();
     		
 			String[]  result = client.execute(params);
@@ -100,7 +106,9 @@ public class WebMessageServiceWrapper {
             
             if(result){
             	Toast.makeText(context, "Mensaje enviado", Toast.LENGTH_SHORT).show();
-            	//TODO: store message in DB
+            	//TODO: store message in DB            	
+            	DataBaseManager db = new DataBaseManager(context);
+            	db.insertNewMessage(from, to, time, message);
             	listener.onMessageSent(message, time);
             }else{
             	Toast.makeText(context, "Mensaje no enviado", Toast.LENGTH_SHORT).show();
