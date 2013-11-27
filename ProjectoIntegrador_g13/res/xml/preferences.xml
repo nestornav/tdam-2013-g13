@@ -41,16 +41,16 @@
                 android:dialogTitle="@string/contacts_pref_order_dialog" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-            android:title="@string/history_pref_title">
- 		<ListPreference
-                android:key="history_pref_order"
-                android:title="@string/history_pref_order"
-                android:summary="@string/history_pref_order_s"
-                android:entries="@array/history_pref_entries"
-                android:entryValues="@array/history_pref_entry_values"
-                android:dialogTitle="@string/history_pref_order_dialog" />
-    </PreferenceCategory>
+<!--     <PreferenceCategory -->
+<!--             android:title="@string/history_pref_title"> -->
+<!--  		<ListPreference -->
+<!--                 android:key="history_pref_order" -->
+<!--                 android:title="@string/history_pref_order" -->
+<!--                 android:summary="@string/history_pref_order_s" -->
+<!--                 android:entries="@array/history_pref_entries" -->
+<!--                 android:entryValues="@array/history_pref_entry_values" -->
+<!--                 android:dialogTitle="@string/history_pref_order_dialog" /> -->
+<!--     </PreferenceCategory> -->
  
 <!--     <PreferenceCategory -->
 <!--             android:title="launch_preferences"> -->
