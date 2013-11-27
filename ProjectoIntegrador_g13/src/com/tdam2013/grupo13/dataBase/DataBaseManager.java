@@ -56,6 +56,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
 		}catch(Exception e){
 			db.close();
 			return false;
+		}finally{
+			if(db != null) db.close();
 		}		
 	}
 	
@@ -71,6 +73,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
 		}catch(Exception e){
 			db.close();
 			return false;
+		}finally{
+			if(db != null) db.close();
 		}		
 	}
 	
@@ -83,13 +87,15 @@ public class DataBaseManager extends SQLiteOpenHelper {
 			cv.put("date",date);
 			cv.put("message",message);
 			
-			db.insert("WebMessage", "idWebMessage", cv);		
+			db.insert("WebMassage", "idWebMessage", cv);		
 			db.close();
 			return true;
 		}catch(Exception e){
 			db.close();
 			return false;
-		}		
+		}finally{
+			if(db != null) db.close();
+		}	
 	}	
 
 	public Cursor getConnectivityLog(){		
@@ -101,7 +107,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 			return c;
 		}catch(Exception e){			
 			return null;
-		}		
+		}
 	}
 	
 	public Cursor getMessageUser(String userId){		
@@ -109,6 +115,18 @@ public class DataBaseManager extends SQLiteOpenHelper {
 		try{
 			String query = "SELECT receiverName, date, message FROM WebMessage WHERE senderName ="+ userId;
 			Cursor c = db.rawQuery(query,new String[]{userId});			
+			return c;
+		}catch(Exception e){
+			db.close();
+			return null;
+		}		
+	}
+	
+	public Cursor getAllMessage(){		
+		SQLiteDatabase db = this.getReadableDatabase();
+		try{
+			String query = "SELECT message, date,receiverName FROM WebMassage";
+			Cursor c = db.rawQuery(query,null);			
 			return c;
 		}catch(Exception e){
 			db.close();
