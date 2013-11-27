@@ -22,6 +22,7 @@ import com.tdam2013.grupo13.messaging.WebMessageServiceListener;
 import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
 import com.tdam2013.grupo13.model.Contact;
 import com.tdam2013.grupo13.model.WebMessage;
+import com.tdam2013.grupo13.notification.MyNotificationManager;
 
 public class WebMessageActivity extends Activity implements WebMessageServiceListener {
 
@@ -108,6 +109,7 @@ public class WebMessageActivity extends Activity implements WebMessageServiceLis
 
 	@Override
 	public void onMessageSent(String message, String time) {
+		MyNotificationManager.notify(this, "Mensaje enviado", "Mensaje enviado a "+contact.getName());
 		editTextMdg.setText("");
 		webMessageAdapter.addItem(new WebMessage(time, message));
 	}

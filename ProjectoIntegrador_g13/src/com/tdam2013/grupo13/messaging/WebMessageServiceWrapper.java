@@ -2,6 +2,9 @@ package com.tdam2013.grupo13.messaging;
 
 import java.util.Date;
 
+import com.tdam2013.grupo13.notification.MyNotificationManager;
+
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
