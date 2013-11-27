@@ -7,8 +7,11 @@ import java.util.HashSet;
 import java.util.Random;
 
 import com.tdam2013.grupo13.adapters.EventHistoryAdapter;
+import com.tdam2013.grupo13.adapters.WebMessageAdapter;
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
 import com.tdam2013.grupo13.model.EventHistory;
 import com.tdam2013.grupo13.model.EventHistory.HistoryEventType;
+import com.tdam2013.grupo13.model.WebMessage;
 
 import android.os.Bundle;
 import android.renderscript.Sampler.Value;
@@ -17,34 +20,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.app.ActionBar.Tab;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar;
 import android.app.ListFragment;
 import android.content.Intent;
+import android.database.Cursor;
 
 public class FragmentTabHistorial extends ListFragment  {
 	private Fragment mFragment;
 
 	// Mock de eventos
-	private static ArrayList<EventHistory> events;
-	static {
-		events = new ArrayList<EventHistory>();
-		Random ran = new Random();
-		HistoryEventType[] types = HistoryEventType.values();
-		int n = types.length;
-		/*HashSet<String> contactos = new HashSet<String>(
-				Arrays.asList(FragmentTabContactos.contactos));
+	private static ArrayList<WebMessage> messages;
+	private DataBaseManager db;
 
-		for (int i = 0; i < 3; i++) {
-			for (String contactName : contactos) {
-				HistoryEventType type = types[ran.nextInt(n)];
-				events.add(new EventHistory(new Date().toLocaleString(),
-						contactName, type));
-			}
-		}*/
-	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,8 +47,25 @@ public class FragmentTabHistorial extends ListFragment  {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setListAdapter(new EventHistoryAdapter(getActivity(), events));
+		db = new DataBaseManager(getActivity().getApplicationContext());
+		
+		setListAdapter(new WebMessageAdapter(getActivity(), getWebMessages()));
+	}
+	
+	public ArrayList<WebMessage> getWebMessages(){
+		messages = new ArrayList<WebMessage>();
+		WebMessage msg;
+		Cursor c = db.getAllMessage();    	
+    	if(c.moveToFirst()){
+        	do {
+        		String message = c.getString(0);
+        		String date = c.getString(1);
+        		String receiverName = c.getString(2);
+        		msg = new WebMessage(date, message,receiverName);
+        		messages.add(msg); 
+			} while (c.moveToNext());    		    		
+    	};
+		return messages;
 	}
 
 	@Override
