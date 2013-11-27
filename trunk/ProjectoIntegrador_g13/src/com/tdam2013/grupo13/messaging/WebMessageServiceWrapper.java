@@ -1,5 +1,7 @@
 package com.tdam2013.grupo13.messaging;
 
+import java.util.Date;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -8,10 +10,12 @@ import android.widget.Toast;
 public class WebMessageServiceWrapper {
 	
 	private Context context;
+	private WebMessageServiceListener listener;
 	
 	
-	public WebMessageServiceWrapper(Context context){
+	public WebMessageServiceWrapper(Context context, WebMessageServiceListener listener){
 		this.context = context;
+		this.listener = listener;
 	}
 	
 	public void registerUser(String userName, String password){
@@ -63,6 +67,8 @@ public class WebMessageServiceWrapper {
 	class MessageSenderAsyncTask extends AsyncTask<String, Integer, Boolean>{
 
 		ProgressDialog pDialog;
+		String message;
+		String time;
 		
 		@Override
         protected void onPreExecute(){
@@ -76,6 +82,9 @@ public class WebMessageServiceWrapper {
     	@Override
 		protected Boolean doInBackground(String... params) {
     		WebMessageClient client = new WebMessageClientSender(context);
+    		message = params[3];
+    		time = new Date().toGMTString();
+    		
 			String[]  result = client.execute(params);
 			return result[0].equals("success");
 		}
@@ -88,6 +97,8 @@ public class WebMessageServiceWrapper {
             
             if(result){
             	Toast.makeText(context, "Mensaje enviado", Toast.LENGTH_SHORT).show();
+            	//TODO: store message in DB
+            	listener.onMessageSent(message, time);
             }else{
             	Toast.makeText(context, "Mensaje no enviado", Toast.LENGTH_SHORT).show();
             }

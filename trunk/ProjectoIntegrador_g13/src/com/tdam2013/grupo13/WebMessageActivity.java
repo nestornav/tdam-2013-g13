@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,45 +18,55 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
+import com.tdam2013.grupo13.messaging.WebMessageServiceListener;
 import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
 import com.tdam2013.grupo13.model.Contact;
 import com.tdam2013.grupo13.model.WebMessage;
 
-public class WebMessageActivity extends Activity {
+public class WebMessageActivity extends Activity implements WebMessageServiceListener {
 
 	private Contact contact;
 	private WebMessageServiceWrapper service;
 	private EditText editTextMdg;
+	private String user;
+	private String pass;
+	private ListView listView;
+	private WebMessageAdapter webMessageAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_message);
 		
-		service = new WebMessageServiceWrapper(this);
+		service = new WebMessageServiceWrapper(this, this);
 		editTextMdg = (EditText) findViewById(R.id.editTextMsg);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		user = prefs.getString("user_name_pref", "");
+		pass = prefs.getString("password_pref", "");
+		
 		Button sendButton = (Button) findViewById(R.id.buttonSendMsg);
 		sendButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String text = editTextMdg.getText().toString();
 				if(!text.equals("")){
-					service.sendMessage("usuario", "123456", contact.getName(), text);
+					service.sendMessage(user, pass, contact.getName(), text);
 				}
 			}
 		});
 		
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");
-		ListView userNameView = (ListView) findViewById(R.id.msgs_list);
+		
+		listView = (ListView) findViewById(R.id.msgs_list);
 		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
-		for (int i = 0; i < 100; i++) {
-			messages.add(new WebMessage(new Date().toLocaleString(), contact.getName()));	
-		}
-		ListAdapter webMessageAdapter = new WebMessageAdapter(this, messages);
+//		for (int i = 0; i < 100; i++) {
+//			messages.add(new WebMessage(new Date().toLocaleString(), contact.getName()));	
+//		}
 		
-		
-		userNameView.setAdapter(webMessageAdapter);		
+		webMessageAdapter = new WebMessageAdapter(this, messages);
+		listView.setAdapter(webMessageAdapter);		
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -92,6 +104,12 @@ public class WebMessageActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onMessageSent(String message, String time) {
+		editTextMdg.setText("");
+		webMessageAdapter.addItem(new WebMessage(time, message));
 	}
 
 

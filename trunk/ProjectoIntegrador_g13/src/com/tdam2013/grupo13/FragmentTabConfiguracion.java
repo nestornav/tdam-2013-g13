@@ -28,7 +28,7 @@ public class FragmentTabConfiguracion extends PreferenceFragment {
 			public boolean onPreferenceClick(Preference arg0) {
 				String userName = sharedPreferences.getString("user_name_pref", "");
 				String password = sharedPreferences.getString("password_pref", "");
-				new WebMessageServiceWrapper(getActivity()).registerUser(userName, password);
+				new WebMessageServiceWrapper(getActivity(), null).registerUser(userName, password);
 				return true;
 			}
 		});
