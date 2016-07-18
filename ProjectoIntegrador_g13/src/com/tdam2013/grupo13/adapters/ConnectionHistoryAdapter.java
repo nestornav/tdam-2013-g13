@@ -1,20 +1,18 @@
 package com.tdam2013.grupo13.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.tdam2013.grupo13.R;
-import com.tdam2013.grupo13.model.ConnectionHistory;
-import com.tdam2013.grupo13.model.ConnectionHistory.ConnectionHistoryStatus;
-import com.tdam2013.grupo13.model.EventHistory.HistoryEventType;
-
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import com.tdam2013.grupo13.R;
+import com.tdam2013.grupo13.model.ConnectionHistory;
+import com.tdam2013.grupo13.model.ConnectionHistory.ConnectionHistoryStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnectionHistoryAdapter extends BaseAdapter {
 
@@ -56,10 +54,10 @@ public class ConnectionHistoryAdapter extends BaseAdapter {
 		ConnectionHistoryStatus status = connection.getConnectionStatus();		
 		switch (status) {
 		case CONNECTED: imageStatus.setImageResource(R.drawable.connection);
-						connectionStatus.setText("Conexión"); 
+						connectionStatus.setText("Conexion");
 						break;
 		case LOST : imageStatus.setImageResource(R.drawable.connection);
-					connectionStatus.setText("Desconexión");
+					connectionStatus.setText("Desconexion");
 					break;
 		}
 				

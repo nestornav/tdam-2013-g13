@@ -1,8 +1,5 @@
 package com.tdam2013.grupo13;
 
-import com.tdam2013.grupo13.dataBase.DataBaseManager;
-import com.tdam2013.grupo13.utils.ActiveService;
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -10,9 +7,13 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.widget.Toast;
+
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
+import com.tdam2013.grupo13.messaging.WebMessageReciverService;
+import com.tdam2013.grupo13.utils.ActiveService;
 
 public class MainActivity extends Activity {
 	// Declare Tab Variable
@@ -137,4 +138,15 @@ public class MainActivity extends Activity {
 	// ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 	// ft.commit();
 	// }
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(PreferenceManager.getDefaultSharedPreferences(this).contains("user_name_pref")){
+			//Start the service who pull the message from the server
+			startService(new Intent(this,WebMessageReciverService.class));
+		}
+
+	}
 }
