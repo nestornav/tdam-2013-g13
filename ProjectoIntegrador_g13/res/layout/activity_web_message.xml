@@ -23,12 +23,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/buttonSendMsg"
         android:ems="10"
         android:inputType="textMultiLine" >
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/buttonGetPoss"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editTextMsg"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/buttonSendMsg"
+        android:text="GPS" />
 
     <Button
         android:id="@+id/buttonSendMsg"
