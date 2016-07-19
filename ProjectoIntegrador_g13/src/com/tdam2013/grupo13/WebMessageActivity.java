@@ -1,7 +1,5 @@
 package com.tdam2013.grupo13;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,11 +14,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
+import com.tdam2013.grupo13.location.LocationService;
 import com.tdam2013.grupo13.messaging.WebMessageServiceListener;
 import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
 import com.tdam2013.grupo13.model.Contact;
 import com.tdam2013.grupo13.model.WebMessage;
 import com.tdam2013.grupo13.notification.MyNotificationManager;
+
+import java.util.ArrayList;
 
 public class WebMessageActivity extends Activity implements
 		WebMessageServiceListener {
@@ -62,6 +63,16 @@ public class WebMessageActivity extends Activity implements
 			}
 		});
 
+		Button gpsButton = (Button) findViewById(R.id.buttonGetPoss);
+		gpsButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LocationService location = new LocationService(getApplicationContext());
+				if(!location.hasLocationEnabled()){
+					location.openDeviceSettings();
+				}
+			}
+		});
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");
 

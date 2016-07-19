@@ -37,7 +37,7 @@ public class LocationService {
     /*If the location service is off this function startup the activity
     * for the location settings*/
     public void openDeviceSettings() {
-        context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+        context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /*This function will create a new listener which
