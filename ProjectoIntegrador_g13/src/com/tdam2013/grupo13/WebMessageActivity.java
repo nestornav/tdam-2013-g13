@@ -1,6 +1,7 @@
 package com.tdam2013.grupo13;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,9 +13,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
-import com.tdam2013.grupo13.location.LocationService;
+import com.tdam2013.grupo13.location.LocationActivity;
 import com.tdam2013.grupo13.messaging.WebMessageServiceListener;
 import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
 import com.tdam2013.grupo13.model.Contact;
@@ -67,12 +69,11 @@ public class WebMessageActivity extends Activity implements
 		gpsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LocationService location = new LocationService(getApplicationContext());
-				if(!location.hasLocationEnabled()){
-					location.openDeviceSettings();
-				}
+				Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
+				startActivityForResult(intent,0);
 			}
 		});
+
 		// Loading contact
 		contact = (Contact) getIntent().getSerializableExtra("contact");
 
@@ -141,4 +142,12 @@ public class WebMessageActivity extends Activity implements
 		webMessageAdapter.addItem(new WebMessage(time, message));
 	}
 
+	@Override
+	 protected void onActivityResult(int requestCode, int resultCode,Intent data){
+		if(requestCode == 0 && resultCode == Activity.RESULT_OK){
+			editTextMdg.setText(data.getStringExtra("location"));
+		}else{
+			Toast.makeText(this, "Prueba de Nuevo", Toast.LENGTH_SHORT).show();
+		}
+	}
 }

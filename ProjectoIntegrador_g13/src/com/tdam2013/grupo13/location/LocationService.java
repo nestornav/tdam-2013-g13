@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 
 /**
  * Created by npnavarr on 15/07/2016.
@@ -16,6 +17,7 @@ public class LocationService {
     private static String SERVICE_PROVIDER = LocationManager.GPS_PROVIDER;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private Location myLocation;
     private Context context;
 
     public LocationService(Context context){
@@ -27,7 +29,7 @@ public class LocationService {
     /*Check if the gps provider is enabled*/
     public boolean hasLocationEnabled() {
         try {
-            return locationManager.isProviderEnabled(SERVICE_PROVIDER);
+             return locationManager.isProviderEnabled(SERVICE_PROVIDER);
         }
         catch (Exception e) {
             return false;
@@ -36,28 +38,32 @@ public class LocationService {
 
     /*If the location service is off this function startup the activity
     * for the location settings*/
-    public void openDeviceSettings() {
+    public void openDeviceSettings(Context context) {
         context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /*This function will create a new listener which
     * will be passed to the location manager to get the las location*/
     public void startLocationUpdate(){
+        myLocation =  locationManager.getLastKnownLocation(SERVICE_PROVIDER);
         locationListener  = new LocationServiceListener();
         locationManager.requestLocationUpdates(SERVICE_PROVIDER,500,0,locationListener);
     }
 
     /*Stop the update of location from gps*/
     public void stopLocationUpdate(){
-        locationManager.removeUpdates(locationListener);
+        if(locationListener != null){
+            locationManager.removeUpdates(locationListener);
+            locationListener = null;
+        }
     }
 
     public Location getLocation(){
-        return locationManager.getLastKnownLocation(SERVICE_PROVIDER);
+        return myLocation;
     }
 
-    private Location showLocation(Location location){
-        return location;
+    private void showLocation(Location location){
+        myLocation = location;
     }
 
     private class LocationServiceListener implements LocationListener{
@@ -65,6 +71,7 @@ public class LocationService {
         @Override
         public void onLocationChanged(Location location) {
             showLocation(location);
+            Log.e("DESDE EL SERVICIO",String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude()));
         }
 
         @Override
