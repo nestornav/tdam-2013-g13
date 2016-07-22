@@ -34,4 +34,12 @@
         android:layout_below="@+id/reciver_name"
         android:text="Este es un mensaje de prueba" />
     
+    <ImageView
+        android:id="@+id/localitation_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/point"
+        android:clickable="true"
+        android:layout_below="@id/reciver_name"/>
+    
 </RelativeLayout>

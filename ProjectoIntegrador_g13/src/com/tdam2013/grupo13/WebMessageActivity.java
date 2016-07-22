@@ -60,6 +60,7 @@ public class WebMessageActivity extends Activity implements
 				if (!text.equals("")) {
 					user = prefs.getString("user_name_pref", "").trim();
 					pass = prefs.getString("password_pref", "").trim();
+					text = "MSG"+text;
 					service.sendMessage(user, pass, contact.getName(), text);
 				}
 			}
@@ -145,7 +146,10 @@ public class WebMessageActivity extends Activity implements
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode,Intent data){
 		if(requestCode == 0 && resultCode == Activity.RESULT_OK){
-			editTextMdg.setText(data.getStringExtra("location"));
+			String myPosition = "LOC"+data.getStringExtra("latitud")+","+data.getStringExtra("longitud");
+			user = prefs.getString("user_name_pref", "").trim();
+			pass = prefs.getString("password_pref", "").trim();
+			service.sendMessage(user, pass, contact.getName(), myPosition);
 		}else{
 			Toast.makeText(this, "Prueba de Nuevo", Toast.LENGTH_SHORT).show();
 		}

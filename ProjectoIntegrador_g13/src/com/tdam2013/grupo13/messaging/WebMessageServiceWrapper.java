@@ -2,6 +2,7 @@ package com.tdam2013.grupo13.messaging;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ public class WebMessageServiceWrapper {
             
             if(result){
             	Toast.makeText(context, "Usuario registrado", Toast.LENGTH_SHORT).show();
+				//Start the service who pull the message from the server
+				context.startService(new Intent(context,WebMessageReciverService.class));
             }else{
             	Toast.makeText(context, "Usuario NO registrado", Toast.LENGTH_SHORT).show();
             }
@@ -59,7 +62,7 @@ public class WebMessageServiceWrapper {
 	}
 	
 	public void sendMessage(String userName, String password, String to, String msg){
-		String[] params = { userName, password, to, msg};
+		String[] params = { userName, password,to, msg};
 		MessageSenderAsyncTask task = new MessageSenderAsyncTask(); 
 		task.execute(params);
 	}
@@ -87,7 +90,6 @@ public class WebMessageServiceWrapper {
     		from = params[0];
     		to = params[2];
     		message = params[3];
-    		
     		time = android.text.format.DateFormat.format("yyyy-MM-dd hh:mm:ss", new java.util.Date()).toString();
     		
 			String[]  result = client.execute(params);
