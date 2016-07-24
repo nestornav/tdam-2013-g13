@@ -1,5 +1,12 @@
 package com.tdam2013.grupo13.messaging;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,13 +22,6 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public abstract class WebMessageClient {
 
@@ -80,7 +80,7 @@ public abstract class WebMessageClient {
 	
 	private String doPost(String request) {
 		String urlStr = sharedPreferences.getString("service_url_pref",
-				"http://192.168.1.104:8080/MessageSender/");
+				"http://192.168.2.112:8080/MessageSender/");
 		logger.log(Level.INFO, "URL: " + urlStr);
 	
 		try{

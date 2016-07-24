@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -39,12 +40,17 @@ public class WebMessageReciverService extends IntentService {
 
         try {
             while(true){
-                Thread.sleep(3000);
+                Thread.sleep(6000);
                 String timestamp = android.text.format.DateFormat.format("dd/MM/yyyy HH:mm:ss", new java.util.Date()).toString();
                 String[] params = {userName,password,timestamp};
                 String[] result = messageReciver.execute(params);
                 if(result[0].equals("success")){
-                    Log.e("Pepe",result[1]);
+
+                    Log.e("Pepe",result[0]);
+                    ArrayList nodes = messageReciver.getNodes();
+                    if(!nodes.isEmpty()){
+                        Log.e("MENSAJES DEVUELTOS","TENEMOS MENSAJES EN EL ARRAY");
+                    }
                     //sendBroadcast(new Intent("nuevo intent"));
                 }
             }
