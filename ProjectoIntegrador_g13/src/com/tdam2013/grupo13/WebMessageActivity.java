@@ -3,6 +3,7 @@ package com.tdam2013.grupo13;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tdam2013.grupo13.adapters.WebMessageAdapter;
+import com.tdam2013.grupo13.dataBase.DataBaseManager;
 import com.tdam2013.grupo13.location.LocationActivity;
 import com.tdam2013.grupo13.messaging.WebMessageServiceListener;
 import com.tdam2013.grupo13.messaging.WebMessageServiceWrapper;
@@ -36,6 +38,7 @@ public class WebMessageActivity extends Activity implements
 	private ListView listView;
 	private WebMessageAdapter webMessageAdapter;
 	private SharedPreferences prefs;
+	private WebMessageAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +82,7 @@ public class WebMessageActivity extends Activity implements
 		contact = (Contact) getIntent().getSerializableExtra("contact");
 
 		listView = (ListView) findViewById(R.id.msgs_list);
-		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
-		// for (int i = 0; i < 100; i++) {
-		// messages.add(new WebMessage(new Date().toLocaleString(),
-		// contact.getName()));
-		// }
-
+		ArrayList<WebMessage> messages = getChatMessage();
 		webMessageAdapter = new WebMessageAdapter(this, messages);
 		listView.setAdapter(webMessageAdapter);
 
@@ -92,6 +90,11 @@ public class WebMessageActivity extends Activity implements
 		setupActionBar();
 	}
 
+	@Override
+	protected void onResume(){
+		super.onResume();
+		//adapter.update(getChatMessage());
+	}
 	/**
 	 * Set up the {@link android.app.ActionBar}.
 	 */
@@ -100,6 +103,24 @@ public class WebMessageActivity extends Activity implements
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setTitle(contact.getName());
 
+	}
+
+	private ArrayList<WebMessage> getChatMessage(){
+		ArrayList<WebMessage> messages = new ArrayList<WebMessage>();
+		DataBaseManager db = new DataBaseManager(this.getApplicationContext());
+		Cursor cursor = db.getMessageUser(contact.getName());
+		WebMessage msg;
+
+		if(cursor.moveToFirst()){
+			do {
+				String message = cursor.getString(0);
+				String date = cursor.getString(1);
+				String receiverName = cursor.getString(2);
+				msg = new WebMessage(date, message,receiverName,contact.getName());
+				messages.add(msg);
+			} while (cursor.moveToNext());
+		};
+		return messages;
 	}
 
 	@Override

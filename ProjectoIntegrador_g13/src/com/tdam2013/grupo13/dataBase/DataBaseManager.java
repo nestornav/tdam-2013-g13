@@ -113,8 +113,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
 	public Cursor getMessageUser(String userId){		
 		SQLiteDatabase db = this.getReadableDatabase();
 		try{
-			String query = "SELECT receiverName, date, message FROM WebMessage WHERE senderName ="+ userId;
-			Cursor c = db.rawQuery(query,new String[]{userId});			
+			String query = "SELECT receiverName, date, message FROM WebMassage WHERE senderName = '"+ userId+"' OR receiverName = '"+ userId+"'";
+			Cursor c = db.rawQuery(query,null);
 			return c;
 		}catch(Exception e){
 			db.close();

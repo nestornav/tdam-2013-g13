@@ -55,7 +55,6 @@ public class LocationActivity extends Activity {
         result.putExtra("longitud",String.valueOf(loc.getLongitude()));
         setResult(Activity.RESULT_OK,result);
         finish();
-
     }
 
     @Override
