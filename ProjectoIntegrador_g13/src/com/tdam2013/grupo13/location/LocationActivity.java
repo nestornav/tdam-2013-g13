@@ -36,31 +36,25 @@ public class LocationActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        int c = 0;
-        boolean hasLocation = true;
 
         // Start the updates
         locationService.startLocationUpdate();
         Location loc = locationService.getLocation();
         while(loc == null){
-            c++;
-            loc = locationService.getLocation();
-            if(c == 10000000){
-                hasLocation = false;
-                break;
+            try {
+                Thread.sleep(1000);
+                loc = locationService.getLocation();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-        if (hasLocation){
-            Log.e("LOCATION latitud:",String.valueOf(loc.getLatitude())+" .... Longitud"+String.valueOf(loc.getLongitude()));
-            Intent result = new Intent();
-            result.putExtra("location",String.valueOf(loc.getLatitude())+","+String.valueOf(loc.getLongitude()));
-            setResult(Activity.RESULT_OK,result);
-            finish();
-        }else{
-            setResult(Activity.RESULT_CANCELED);
-            finish();
-        }
 
+        Log.e("LOCATION latitud:",String.valueOf(loc.getLatitude())+" .... Longitud"+String.valueOf(loc.getLongitude()));
+        Intent result = new Intent();
+        result.putExtra("latitud",String.valueOf(loc.getLatitude()));
+        result.putExtra("longitud",String.valueOf(loc.getLongitude()));
+        setResult(Activity.RESULT_OK,result);
+        finish();
     }
 
     @Override

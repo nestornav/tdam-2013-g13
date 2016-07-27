@@ -1,19 +1,19 @@
 package com.tdam2013.grupo13.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.ReceiverCallNotAllowedException;
-import android.location.Address;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tdam2013.grupo13.R;
-import com.tdam2013.grupo13.model.ConnectionHistory;
 import com.tdam2013.grupo13.model.WebMessage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebMessageAdapter extends BaseAdapter{
 	
@@ -61,8 +61,25 @@ public class WebMessageAdapter extends BaseAdapter{
 		dateTime.setText(message.getDateTime());
 		
 		TextView messageContent = (TextView) convertView.findViewById(R.id.message_content);
-		messageContent.setText(message.getMessage());
-		
+		ImageView locationContent = (ImageView) convertView.findViewById(R.id.localitation_content);
+		String [] msg = messageType(message.getMessage());
+		if(msg[0].equals("MSG")){
+			messageContent.setText(msg[1]);
+			messageContent.setVisibility(View.VISIBLE);
+			locationContent.setVisibility(View.GONE);
+		}else{
+			locationContent.setVisibility(View.VISIBLE);
+			messageContent.setVisibility(View.GONE);
+			locationContent.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:"+msg[1]));
+					intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+					activity.startActivity(intent);
+				}
+			});
+		}
+
 		return convertView;
 	}
 
@@ -71,4 +88,12 @@ public class WebMessageAdapter extends BaseAdapter{
 		notifyDataSetChanged();
 	}
 
+	public String[] messageType(String message){
+		String[] messageParsed = new String[2];
+
+		messageParsed[0] = message.substring(0,3);
+		messageParsed[1] = message.substring(3);
+
+		return messageParsed;
+	}
 }
